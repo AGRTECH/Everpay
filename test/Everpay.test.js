@@ -21,12 +21,48 @@ contract("Everypay", ([deployer, sender, receiver]) => {
       await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
         from: sender,
       });
+      await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
+        from: sender,
+      });
     });
-    it("Streams Money", async () => {
+    it("Streams Money Twice", async () => {
+      //  tether balance after 1 stream
       let balanceOfReceiver = await tether.balanceOf(receiver);
-      assert.equal(balanceOfReceiver, tokens("200"));
+      assert.equal(balanceOfReceiver, tokens("400"));
+
+      // stream balance after 1 stream
       let streamBalance = await everpay.streamBalanceOf(receiver);
-      assert.equal(streamBalance.toString(), "200");
+      assert.equal(streamBalance.toString(), tokens("400"));
+
+      // depositAmountRemaining mapping
+      let depositAmountLeft = await everpay.depositAmountRemaining(receiver);
+      assert.equal(depositAmountLeft, tokens("2600"));
+
+      // everpay contract balance
+      let everpayBalance = await tether.balanceOf(everpay.address);
+      assert.equal(everpayBalance, tokens("2600"));
+
+      // Log sender balance
+      let senderBalance = await tether.balanceOf(sender);
+      console.log("sender balance", tokens(senderBalance.toString()));
+    });
+  });
+  describe("Cancel", async () => {
+    beforeEach(async () => {
+      await tether.approve(everpay.address, tokens("3000"), { from: sender });
+      await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
+        from: sender,
+      });
+      await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
+        from: sender,
+      });
+      await everpay.cancel(receiver, tether.address, {
+        from: sender,
+      });
+    });
+    it("Cancels", async () => {
+      let balanceOfSender = await tether.balanceOf(sender);
+      assert.equal(balanceOfSender.toString(), tokens("4600"));
     });
   });
 });
