@@ -12,23 +12,21 @@ contract("Everypay", ([deployer, sender, receiver]) => {
   beforeEach(async () => {
     tether = await Tether.new();
     everpay = await Everpay.new(tether.address);
-    await tether.transfer(sender, tokens("5000"), { from: deployer });
+    await tether.transfer(sender, tokens("5000"));
   });
 
   describe("Stream", async () => {
-    // beforeEach(async () => {
-    //   await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
-    //     from: sender,
-    //   });
-    // });
+    beforeEach(async () => {
+      await tether.approve(everpay.address, tokens("3000"), { from: sender });
+      await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
+        from: sender,
+      });
+    });
     it("Streams Money", async () => {
-      // let balanceOfSender = await tether.balanceOf(sender);
-      // console.log("balance of sender", balanceOfSender.toString());
-      let balanceOfReceiver = await everpay.balanceOf(sender);
-      console.log(
-        "balance of receiver after transfer",
-        balanceOfReceiver.toString()
-      );
+      let balanceOfReceiver = await tether.balanceOf(receiver);
+      assert.equal(balanceOfReceiver, tokens("200"));
+      let streamBalance = await everpay.streamBalanceOf(receiver);
+      assert.equal(streamBalance.toString(), "200");
     });
   });
 });

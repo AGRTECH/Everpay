@@ -17,13 +17,12 @@ contract Everpay {
   
    address public owner;
    Tether public tether;
+  mapping(address => uint) public streamBalanceOf;
    
   constructor(Tether _tether) public {
     tether = _tether;
     owner = msg.sender;
   }
-
-  mapping(address => uint) public balanceOf;
 
   event Stream(
     address _sender, 
@@ -34,14 +33,17 @@ contract Everpay {
     uint256 _endTime
   );
 
-  function stream(address payable _receiver, uint _deposit, address _token, uint _startTime, uint _endTime) public {
-    require(_deposit <= balanceOf[msg.sender]);
+  function stream(address payable _receiver, uint  _deposit, address _token, uint _startTime, uint _endTime) public {
     // Make sure that user inputed _startTime and _endTime are in seconds
 
     uint _timeDiff = _endTime.sub(_startTime);
     uint _dividedAmount = _deposit.div(_timeDiff);
 
-    balanceOf[_receiver] = balanceOf[_receiver].add(_dividedAmount);
+    // Transfers tether amount from sender to receiver
+    tether.transferFrom(msg.sender, _receiver, _dividedAmount);
+
+    // Update current stream balance
+     streamBalanceOf[_receiver] = streamBalanceOf[_receiver].add(_dividedAmount);
 
     emit Stream(msg.sender, _receiver, _deposit, _token, _startTime, _endTime);
   }
