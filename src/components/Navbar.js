@@ -1,10 +1,11 @@
+import "./App.css";
 import { connect } from "react-redux";
-import { accountSelector } from "../store/selectors";
+import { accountSelector, everpayLoadedSelector } from "../store/selectors";
 import React from "react";
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary navshadow">
       <a className="navbar-brand" href="/#">
         Everpay
       </a>
@@ -14,7 +15,15 @@ const Navbar = () => {
             className="nav-link small"
             href={`https://etherscan.io/address/${props.account}`}
           >
-            {props.account}
+            {props.everpayLoaded
+              ? `${props.account
+                  .split("")
+                  .splice(0, 5, "")
+                  .join("")}...${props.account
+                  .split("")
+                  .splice(38, 4, "")
+                  .join("")}`
+              : ""}
           </a>
         </li>
       </ul>
@@ -25,6 +34,7 @@ const Navbar = () => {
 function mapStateToProps(state) {
   return {
     account: accountSelector(state),
+    everpayLoaded: everpayLoadedSelector(state),
   };
 }
 
