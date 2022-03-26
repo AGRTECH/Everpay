@@ -1,12 +1,14 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
+import StreamChart from "./StreamChart";
 import { connect } from "react-redux";
 import {
   loadAccount,
   loadWeb3,
   loadEverpay,
   loadTether,
+  subscribeToEvents,
 } from "../store/interactions";
 
 const App = (props) => {
@@ -25,7 +27,7 @@ const App = (props) => {
       );
     } else {
       // await loadAllData(voting, dispatch);
-      // await subscribeToEvents(voting, dispatch);
+      await subscribeToEvents(everpay, dispatch);
     }
   };
 
@@ -40,6 +42,7 @@ const App = (props) => {
   return (
     <>
       <Navbar />
+      <StreamChart />
     </>
   );
 };

@@ -1,49 +1,41 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
+import CreateStream from "./CreateStream";
+import ReactApexChart from "react-apexcharts";
 import { connect } from "react-redux";
-import {
-  loadAccount,
-  loadWeb3,
-  loadEverpay,
-  loadTether,
-} from "../store/interactions";
 
-class StreamChart extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      series: [70],
-      options: {
-        chart: {
-          height: 350,
-          type: "radialBar",
+const StreamChart = () => {
+  const [series, setSeries] = useState([70]);
+  const [options, setOptions] = useState({
+    chart: {
+      height: 350,
+      type: "radialBar",
+    },
+    plotOptions: {
+      radialBar: {
+        hollow: {
+          size: "70%",
         },
-        plotOptions: {
-          radialBar: {
-            hollow: {
-              size: "70%",
-            },
-          },
-        },
-        labels: ["Cricket"],
       },
-    };
-  }
+    },
+    labels: ["Tether"],
+  });
 
-  render() {
-    return (
-      <div id="chart">
+  return (
+    <div id="chart">
+      {1 === 2 ? (
         <ReactApexChart
-          options={this.state.options}
-          series={this.state.series}
+          options={options}
+          series={series}
           type="radialBar"
           height={350}
         />
-      </div>
-    );
-  }
-}
+      ) : (
+        <CreateStream />
+      )}
+    </div>
+  );
+};
 function mapStateToProps(state) {
   return {};
 }
