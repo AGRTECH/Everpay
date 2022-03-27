@@ -8,7 +8,7 @@ import {
   loadWeb3,
   loadEverpay,
   loadTether,
-  subscribeToEvents,
+  // subscribeToEvents,
 } from "../store/interactions";
 
 const App = (props) => {
@@ -27,7 +27,7 @@ const App = (props) => {
       );
     } else {
       // await loadAllData(voting, dispatch);
-      await subscribeToEvents(everpay, dispatch);
+      // await subscribeToEvents(everpay, dispatch);
     }
   };
 

@@ -3,6 +3,7 @@ import React, { Component, useState, useEffect } from "react";
 import CreateStream from "./CreateStream";
 import ReactApexChart from "react-apexcharts";
 import { connect } from "react-redux";
+import { everpayLoadedSelector } from "../store/selectors";
 
 const StreamChart = () => {
   const [series, setSeries] = useState([70]);
@@ -37,7 +38,9 @@ const StreamChart = () => {
   );
 };
 function mapStateToProps(state) {
-  return {};
+  return {
+    everpayLoaded: everpayLoadedSelector(state),
+  };
 }
 
 export default connect(mapStateToProps)(StreamChart);

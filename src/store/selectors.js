@@ -18,3 +18,15 @@ export const everpayLoadedSelector = createSelector(everpayLoaded, (el) => el);
 
 const everpay = (state) => get(state, "everpay.contract");
 export const everpaySelector = createSelector(everpay, (e) => e);
+
+const receiver = (state) => get(state, "everpay.streamRecipientAddress");
+export const receiverSelector = createSelector(receiver, (e) => e);
+
+const deposit = (state) => get(state, "everpay.streamDepositAmount");
+export const depositSelector = createSelector(deposit, (e) => e);
+
+const streamToken = (state) => get(state, "everpay.streamTokenContract");
+export const streamTokenSelector = createSelector(streamToken, (e) => e);
+
+const endTime = (state) => get(state, "everpay.streamEndTime");
+export const endTimeSelector = createSelector(endTime, (e) => e);

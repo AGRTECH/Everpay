@@ -23,6 +23,16 @@ function everpay(state = {}, action) {
   switch (action.type) {
     case "EVERPAY_LOADED":
       return { ...state, loaded: true, contract: action.contract };
+    case "STREAM_CREATING":
+      return { ...state, streamCreated: false };
+    case "TOKEN_CHANGED":
+      return { ...state, streamTokenContract: action.contract };
+    case "STREAM_AMOUNT_CHANGED":
+      return { ...state, streamDepositAmount: action.amount };
+    case "RECIPIENT_ADDRESS_CHANGED":
+      return { ...state, streamRecipientAddress: action.address };
+    case "END_TIME_CHANGED":
+      return { ...state, streamEndTime: action.time };
     default:
       return state;
   }
