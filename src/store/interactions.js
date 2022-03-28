@@ -55,26 +55,30 @@ export const loadEverpay = async (web3, networkId, dispatch) => {
   }
 };
 
-// export const subscribeToEvents = async (everpay, dispatch) => {
-//   everpay.events.Stream({}, (error, event) => {
-//     dispatch(streamCreated(event.returnValues));
-//   });
-// };
+export const subscribeToEvents = async (everpay, dispatch) => {
+  everpay.events.Stream({}, (error, event) => {
+    dispatch(streamCreated(event.returnValues));
+  });
+};
 
-// receiver,
-//   deposit,
-//   token,
-//   startTime,
-//   endTime
-// export const createStreamFunc = (dispatch, everpay, account) => {
-//   everpay.methods
-//     .stream()
-//     .send({ from: account })
-//     .on("transactionHash", (hash) => {
-//       dispatch(streamCreating());
-//     })
-//     .on("error", (error) => {
-//       console.error(error);
-//       window.alert(`There was an error!`);
-//     });
-// };
+export const createStreamFunc = (
+  dispatch,
+  everpay,
+  account,
+  receiver,
+  deposit,
+  streamToken,
+  endTime,
+  tether
+) => {
+  everpay.methods
+    .stream(receiver, deposit, streamToken, endTime)
+    .send({ from: account })
+    .on("transactionHash", (hash) => {
+      dispatch(streamCreating());
+    })
+    .on("error", (error) => {
+      console.error(error);
+      window.alert(`There was an error!`);
+    });
+};

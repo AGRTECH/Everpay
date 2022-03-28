@@ -26,10 +26,10 @@ export function everpayLoaded(contract) {
   };
 }
 
-export function streamCreated(data) {
+export function streamCreated(streamData) {
   return {
     type: "STREAM_CREATED",
-    data,
+    streamData,
   };
 }
 

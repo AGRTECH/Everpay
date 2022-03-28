@@ -20,11 +20,30 @@ function tether(state = {}, action) {
   }
 }
 function everpay(state = {}, action) {
+  let data;
   switch (action.type) {
     case "EVERPAY_LOADED":
       return { ...state, loaded: true, contract: action.contract };
     case "STREAM_CREATING":
       return { ...state, streamCreated: false };
+    case "STREAM_CREATED":
+      if (state.streamCreatedData) {
+        data = [...state.streamCreatedData.data, action.streamData];
+        console.log("top", data.length);
+      } else {
+        data = [action.streamData];
+        console.log("bot", data.length);
+      }
+
+      return {
+        ...state,
+        streamCreated: true,
+
+        streamCreatedData: {
+          ...state.streamCreatedData,
+          data,
+        },
+      };
     case "TOKEN_CHANGED":
       return { ...state, streamTokenContract: action.contract };
     case "STREAM_AMOUNT_CHANGED":

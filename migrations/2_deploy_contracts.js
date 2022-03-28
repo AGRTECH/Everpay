@@ -7,6 +7,4 @@ module.exports = async function (deployer, network, accounts) {
 
   await deployer.deploy(Everpay, tether.address);
   const everpay = await Everpay.deployed();
-
-  await tether.transfer(everpay.address, "1000000000000000000000000");
 };

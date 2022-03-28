@@ -18,10 +18,10 @@ contract("Everypay", ([deployer, sender, receiver]) => {
   describe("Stream", async () => {
     beforeEach(async () => {
       await tether.approve(everpay.address, tokens("3000"), { from: sender });
-      await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
+      await everpay.stream(receiver, tokens("3000"), tether.address, 15, {
         from: sender,
       });
-      await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
+      await everpay.stream(receiver, tokens("3000"), tether.address, 15, {
         from: sender,
       });
     });
@@ -31,11 +31,14 @@ contract("Everypay", ([deployer, sender, receiver]) => {
       assert.equal(balanceOfReceiver, tokens("400"));
 
       // stream balance after 1 stream
-      let streamBalance = await everpay.streamBalanceOf(receiver);
+      let streamBalance = await everpay.streamBalanceOf(sender, receiver);
       assert.equal(streamBalance.toString(), tokens("400"));
 
       // depositAmountRemaining mapping
-      let depositAmountLeft = await everpay.depositAmountRemaining(receiver);
+      let depositAmountLeft = await everpay.depositAmountRemaining(
+        sender,
+        receiver
+      );
       assert.equal(depositAmountLeft, tokens("2600"));
 
       // everpay contract balance
@@ -44,16 +47,15 @@ contract("Everypay", ([deployer, sender, receiver]) => {
 
       // Log sender balance
       let senderBalance = await tether.balanceOf(sender);
-      console.log("sender balance", tokens(senderBalance.toString()));
     });
   });
   describe("Cancel", async () => {
     beforeEach(async () => {
       await tether.approve(everpay.address, tokens("3000"), { from: sender });
-      await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
+      await everpay.stream(receiver, tokens("3000"), tether.address, 15, {
         from: sender,
       });
-      await everpay.stream(receiver, tokens("3000"), tether.address, 0, 15, {
+      await everpay.stream(receiver, tokens("3000"), tether.address, 15, {
         from: sender,
       });
       await everpay.cancel(receiver, tether.address, {
@@ -63,6 +65,8 @@ contract("Everypay", ([deployer, sender, receiver]) => {
     it("Cancels", async () => {
       let balanceOfSender = await tether.balanceOf(sender);
       assert.equal(balanceOfSender.toString(), tokens("4600"));
+      let balanceOfContract = await tether.balanceOf(deployer);
+      console.log(deployer, balanceOfContract.toString());
     });
   });
 });

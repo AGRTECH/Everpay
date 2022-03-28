@@ -31,7 +31,6 @@ contract Everpay {
     address _token,
     uint256 _streamBalanceOfReceiver, 
     uint256 _depositRemaining,
-    uint256 _startTime, 
     uint256 _endTime,
     uint256 _timestamp
   );
@@ -44,7 +43,7 @@ contract Everpay {
     uint256 _timestamp
   );
 
-  function stream(address _receiver, uint  _deposit, address _token, uint _startTime, uint _endTime) public {
+  function stream(address _receiver, uint  _deposit, address _token, uint _endTime) public {
     // Make sure that user inputed _startTime and _endTime are in seconds
      if(!isStreaming[_receiver]){
 
@@ -54,12 +53,13 @@ contract Everpay {
     require(tether.balanceOf(msg.sender) >= _deposit);
 
      // Transfers full tether amount from sender to this contract address to distribute it to receiver
+    tether.approve(address(this), _deposit);
     tether.transferFrom(msg.sender, address(this), _deposit);
     }
     require(_deposit > 0);
     require(depositAmountRemaining[msg.sender][_receiver] > 0);
 
-    uint _timeDiff = _endTime.sub(_startTime);
+    uint _timeDiff = _endTime.sub(0);
     uint _dividedAmount = _deposit.div(_timeDiff);
 
     // Transfer divided amount from contract to receiver
@@ -75,7 +75,7 @@ contract Everpay {
     //  Set streaming to true for receiver address
     isStreaming[_receiver] = true;
 
-    emit Stream(msg.sender, _receiver, _deposit, _token, streamBalanceOf[msg.sender][_receiver], depositAmountRemaining[msg.sender][_receiver], _startTime, _endTime, now);
+    emit Stream(msg.sender, _receiver, _deposit, _token, streamBalanceOf[msg.sender][_receiver], depositAmountRemaining[msg.sender][_receiver], _endTime, now);
   }
 
   function cancel(address _receiver, address _token) public {

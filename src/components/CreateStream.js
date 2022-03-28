@@ -10,8 +10,9 @@ import {
   depositSelector,
   streamTokenSelector,
   endTimeSelector,
+  tetherLoadedSelector,
 } from "../store/selectors";
-// import { createStreamFunc } from "../store/interactions";
+import { createStreamFunc } from "../store/interactions";
 import { Button, Modal, Dropdown } from "react-bootstrap";
 import {
   tokenChanged,
@@ -30,16 +31,24 @@ const CreateStream = (props) => {
     return "not working";
   };
 
-  const { dispatch, everpay, account, everpayLoaded, tether } = props;
+  const {
+    dispatch,
+    everpay,
+    account,
+    everpayLoaded,
+    tether,
+    receiver,
+    endTime,
+    deposit,
+    streamToken,
+    tetherLoaded,
+  } = props;
 
   return (
     <>
       {everpayLoaded ? (
         <div>
           <h1>Create A Stream Here</h1>
-          {/* <button onClick={createStreamFunc(dispatch, everpay, account)}> */}
-          {/* Create Stream */}
-          {/* </button> */}
           <Button variant="primary" onClick={handleShow}>
             Stream!
           </Button>
@@ -53,10 +62,19 @@ const CreateStream = (props) => {
                 className=""
                 onSubmit={(e) => {
                   e.preventDefault();
-                  // createStreamFunc(dispatch, everpay, account);
+                  createStreamFunc(
+                    dispatch,
+                    everpay,
+                    account,
+                    receiver,
+                    deposit,
+                    streamToken,
+                    endTime,
+                    tether
+                  );
                 }}
               >
-                <Dropdown>
+                <Dropdown className="form-group">
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                     Token
                   </Dropdown.Toggle>
@@ -77,9 +95,9 @@ const CreateStream = (props) => {
                   type="text"
                   placeholder="Stream Amount"
                   onChange={(e) => {
-                    dispatch(streamAmountChanged(e.target.value));
+                    dispatch(streamAmountChanged(parseInt(e.target.value)));
                   }}
-                  className="bg-dark text-white "
+                  className="bg-dark text-white form-group"
                   required
                 />
                 <input
@@ -96,19 +114,11 @@ const CreateStream = (props) => {
                       dispatch(recipientAddressChanged(e.target.value));
                     }
                   }}
-                  className="bg-dark text-white "
+                  className="bg-dark text-white form-group"
                   required
                 />
-                <input
-                  type="text"
-                  placeholder="End Time"
-                  onChange={(e) => {
-                    // dispatch(endTimeChanged(e.target.value));
-                  }}
-                  className="bg-dark text-white "
-                  required
-                />
-                <Dropdown>
+
+                <Dropdown className="form-group">
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                     Time interval (in seconds)
                   </Dropdown.Toggle>
@@ -196,7 +206,7 @@ const CreateStream = (props) => {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <button className="btn btn-primary" type="submit">
+                <button className="btn btn-primary form-group" type="submit">
                   Create Stream
                 </button>
               </form>
@@ -223,6 +233,7 @@ function mapStateToProps(state) {
     tether: tetherSelector(state),
     account: accountSelector(state),
     everpayLoaded: everpayLoadedSelector(state),
+    tetherLoaded: tetherLoadedSelector(state),
     receiver: receiverSelector(state),
     deposit: depositSelector(state),
     streamToken: streamTokenSelector(state),
