@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
   everpaySelector,
@@ -11,8 +11,13 @@ import {
   streamTokenSelector,
   endTimeSelector,
   tetherLoadedSelector,
+  approvedSelector,
 } from "../store/selectors";
-import { createStreamFunc } from "../store/interactions";
+import {
+  createStreamFunc,
+  approveFunds,
+  showBalances,
+} from "../store/interactions";
 import { Button, Modal, Dropdown } from "react-bootstrap";
 import {
   tokenChanged,
@@ -20,16 +25,13 @@ import {
   recipientAddressChanged,
   endTimeChanged,
 } from "../store/actions";
+import Timer from "./Timer";
 
 const CreateStream = (props) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const filler = () => {
-    return "not working";
-  };
 
   const {
     dispatch,
@@ -41,18 +43,26 @@ const CreateStream = (props) => {
     endTime,
     deposit,
     streamToken,
+    approved,
     tetherLoaded,
   } = props;
 
   return (
     <>
-      {everpayLoaded ? (
+      {everpayLoaded && tetherLoaded ? (
         <div>
+          <Timer />
           <h1>Create A Stream Here</h1>
+          <button
+            onClick={() => {
+              showBalances(account, tether, everpay);
+            }}
+          >
+            Show Balances
+          </button>
           <Button variant="primary" onClick={handleShow}>
             Stream!
           </Button>
-
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Create Stream</Modal.Title>
@@ -62,16 +72,7 @@ const CreateStream = (props) => {
                 className=""
                 onSubmit={(e) => {
                   e.preventDefault();
-                  createStreamFunc(
-                    dispatch,
-                    everpay,
-                    account,
-                    receiver,
-                    deposit,
-                    streamToken,
-                    endTime,
-                    tether
-                  );
+                  approveFunds(everpay, tether, deposit, account, dispatch);
                 }}
               >
                 <Dropdown className="form-group">
@@ -207,7 +208,7 @@ const CreateStream = (props) => {
                   </Dropdown.Menu>
                 </Dropdown>
                 <button className="btn btn-primary form-group" type="submit">
-                  Create Stream
+                  Approve Funds
                 </button>
               </form>
             </Modal.Body>
@@ -215,7 +216,7 @@ const CreateStream = (props) => {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="primary" onClick={handleClose}>
+              <Button variant="primary" onClick={() => {}}>
                 Finalize
               </Button>
             </Modal.Footer>
@@ -238,6 +239,7 @@ function mapStateToProps(state) {
     deposit: depositSelector(state),
     streamToken: streamTokenSelector(state),
     endTime: endTimeSelector(state),
+    approved: approvedSelector(state),
   };
 }
 

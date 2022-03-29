@@ -30,3 +30,6 @@ export const streamTokenSelector = createSelector(streamToken, (e) => e);
 
 const endTime = (state) => get(state, "everpay.streamEndTime");
 export const endTimeSelector = createSelector(endTime, (e) => e);
+
+const approved = (state) => get(state, "everpay.fundsApproved", false);
+export const approvedSelector = createSelector(approved, (e) => e);

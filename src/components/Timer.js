@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import "./App.css";
+import { createStreamFunc } from "../store/interactions";
 import {
   everpaySelector,
   accountSelector,
@@ -13,9 +13,10 @@ import {
   tetherLoadedSelector,
   approvedSelector,
 } from "../store/selectors";
-import { createStreamFunc } from "../store/interactions";
 
-const FullStream = (props) => {
+const Timer = (props) => {
+  const [isActive, setIsActive] = useState(false);
+  const [seconds, setSeconds] = useState(0);
   const {
     dispatch,
     everpay,
@@ -29,43 +30,41 @@ const FullStream = (props) => {
     approved,
     tetherLoaded,
   } = props;
-
-  // const [seconds, setSeconds] = useState(props.time);
   useEffect(() => {
-    // setInterval(() => {
-    // setSeconds((seconds) => {
-    // if (seconds > 0) {
-    //   return seconds - 1;
-    // } else {
-    //   return "Poll end";
-    // }
-    // });
-    createStreamFunc(
-      dispatch,
-      everpay,
-      account,
-      receiver,
-      deposit,
-      streamToken,
-      endTime,
-      approved
-    );
-    // console.log(
-    //   createStreamFunc(
-    //     dispatch,
-    //     everpay,
-    //     account,
-    //     receiver,
-    //     deposit,
-    //     streamToken,
-    //     endTime,
-    //     approved
-    //   )
-    // );
-    // }, 1000);
-  }, []);
-
-  return <></>;
+    let timer = null;
+    if (isActive) {
+      timer = setInterval(() => {
+        setSeconds((seconds) => seconds + 1);
+        createStreamFunc(
+          dispatch,
+          everpay,
+          account,
+          receiver,
+          deposit,
+          streamToken,
+          endTime,
+          approved
+        );
+      }, 1000);
+    }
+    return () => {
+      clearInterval(timer);
+    };
+  });
+  return (
+    <div>
+      Seconds: {seconds}
+      <br />
+      <button
+        onClick={() => {
+          setIsActive(true);
+        }}
+      >
+        {" "}
+        Start{" "}
+      </button>
+    </div>
+  );
 };
 
 function mapStateToProps(state) {
@@ -83,4 +82,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(FullStream);
+export default connect(mapStateToProps)(Timer);

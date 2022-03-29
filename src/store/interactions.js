@@ -8,6 +8,7 @@ import {
   tetherLoaded,
   streamCreated,
   streamCreating,
+  approved,
 } from "./actions";
 
 export const loadWeb3 = (dispatch) => {
@@ -61,6 +62,27 @@ export const subscribeToEvents = async (everpay, dispatch) => {
   });
 };
 
+export const showBalances = async (account, tether, everpay) => {
+  let balance = await tether.methods.balanceOf(account).call();
+  let balanceOfExchange = await tether.methods
+    .balanceOf(tether.options.address)
+    .call();
+  console.log("balance account: ", balance);
+};
+
+export const approveFunds = (everpay, tether, deposit, account, dispatch) => {
+  tether.methods
+    .approve(everpay.options.address, deposit)
+    .send({ from: account })
+    .on("transactionHash", (hash) => {
+      dispatch(approved());
+    })
+    .on("error", (error) => {
+      console.error(error);
+      window.alert(`There was an error!`);
+    });
+};
+
 export const createStreamFunc = (
   dispatch,
   everpay,
@@ -69,16 +91,18 @@ export const createStreamFunc = (
   deposit,
   streamToken,
   endTime,
-  tether
+  approved
 ) => {
-  everpay.methods
-    .stream(receiver, deposit, streamToken, endTime)
-    .send({ from: account })
-    .on("transactionHash", (hash) => {
-      dispatch(streamCreating());
-    })
-    .on("error", (error) => {
-      console.error(error);
-      window.alert(`There was an error!`);
-    });
+  if (approved) {
+    everpay.methods
+      .stream(receiver, deposit, streamToken, endTime)
+      .send({ from: account })
+      .on("transactionHash", (hash) => {
+        dispatch(streamCreating());
+      })
+      .on("error", (error) => {
+        console.error(error);
+        window.alert(`There was an error!`);
+      });
+  }
 };

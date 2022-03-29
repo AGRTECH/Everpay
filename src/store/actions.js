@@ -66,3 +66,9 @@ export function endTimeChanged(time) {
     time,
   };
 }
+
+export function approved() {
+  return {
+    type: "APPROVED",
+  };
+}

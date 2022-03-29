@@ -26,6 +26,8 @@ function everpay(state = {}, action) {
       return { ...state, loaded: true, contract: action.contract };
     case "STREAM_CREATING":
       return { ...state, streamCreated: false };
+    case "APPROVED":
+      return { ...state, fundsApproved: true };
     case "STREAM_CREATED":
       if (state.streamCreatedData) {
         data = [...state.streamCreatedData.data, action.streamData];
