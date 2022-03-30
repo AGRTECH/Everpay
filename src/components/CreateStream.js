@@ -12,6 +12,8 @@ import {
   endTimeSelector,
   tetherLoadedSelector,
   approvedSelector,
+  allStreamsSelector,
+  allStreamsLoadedSelector,
 } from "../store/selectors";
 import {
   createStreamFunc,
@@ -26,12 +28,16 @@ import {
   endTimeChanged,
 } from "../store/actions";
 import Timer from "./Timer";
+import Streaming from "./Streaming";
 
 const CreateStream = (props) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  let tempDeposit = 4000;
+  let tempRate = 1000;
 
   const {
     dispatch,
@@ -45,13 +51,14 @@ const CreateStream = (props) => {
     streamToken,
     approved,
     tetherLoaded,
+    allStreams,
+    allStreamsLoaded,
   } = props;
 
   return (
     <>
       {everpayLoaded && tetherLoaded ? (
         <div>
-          <Timer />
           <h1>Create A Stream Here</h1>
           <button
             onClick={() => {
@@ -216,7 +223,21 @@ const CreateStream = (props) => {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="primary" onClick={() => {}}>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  createStreamFunc(
+                    dispatch,
+                    everpay,
+                    account,
+                    receiver,
+                    deposit,
+                    streamToken,
+                    endTime,
+                    approved
+                  );
+                }}
+              >
                 Finalize
               </Button>
             </Modal.Footer>
@@ -240,6 +261,8 @@ function mapStateToProps(state) {
     streamToken: streamTokenSelector(state),
     endTime: endTimeSelector(state),
     approved: approvedSelector(state),
+    allStreams: allStreamsSelector(state),
+    allStreamsLoaded: allStreamsLoadedSelector(state),
   };
 }
 

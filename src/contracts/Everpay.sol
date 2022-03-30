@@ -7,9 +7,6 @@ import './Tether.sol';
 // [X] Stream function (sent by sender received by receiver)
 // [X] Withdraw function (have to create so the receiver doesnt have to accept a million transfer requests)
 // [X] Cancel function (just sender)
-// []
-// []
-// []
 
 contract Everpay {
   using SafeMath for uint;
@@ -19,7 +16,7 @@ contract Everpay {
    uint256 public streamId;
    mapping(address => mapping(address => uint))public streamBalanceOf;
    mapping(address => mapping(address => uint)) public depositAmountRemaining;
-   mapping(uint256 => Stream) public streams;
+   mapping(uint256 => _Stream) public streams;
    mapping(address => bool) public isStreaming;
    constructor(Tether _tether) public {
     tether = _tether;
@@ -42,7 +39,7 @@ contract Everpay {
     address _receiver, 
     uint256 _deposit, 
     address _token,
-    uint256 _streamBalanceOfReceiver, 
+    uint256 _rate,
     uint256 _depositRemaining,
     uint256 _endTime,
     uint256 _timestamp
@@ -86,10 +83,10 @@ contract Everpay {
     // tether.transfer(_receiver, _dividedAmount);
 
     // Update current stream balance of this particular sender to receiver
-    streamBalanceOf[msg.sender][_receiver] = streamBalanceOf[msg.sender][_receiver].add(_dividedAmount);
+    // streamBalanceOf[msg.sender][_receiver] = streamBalanceOf[msg.sender][_receiver].add(_dividedAmount);
 
     //  Store and sub deposit amount remaining in mapping
-    depositAmountRemaining[msg.sender][_receiver] = depositAmountRemaining[msg.sender][_receiver].sub(_dividedAmount);
+    // depositAmountRemaining[msg.sender][_receiver] = depositAmountRemaining[msg.sender][_receiver].sub(_dividedAmount);
 
     //  Set streaming to true for receiver address
     isStreaming[_receiver] = true;
@@ -100,17 +97,17 @@ contract Everpay {
     // Add stream to stream mapping
     streams[streamId] = _Stream(_deposit, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], _endTime, _receiver, msg.sender, _token);
 
-    emit Stream(streamId, msg.sender, _receiver, _deposit, _token, streamBalanceOf[msg.sender][_receiver], depositAmountRemaining[msg.sender][_receiver], _endTime, now);
+    emit Stream(streamId, msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], _endTime, now);
   }
 
-  function withdraw(uint _balance) public {
+  function withdraw(uint _balance, address _sender) public {
     require(_balance > 0);
     require(isStreaming[msg.sender] == true);
 
     // Transfer available balance to receiver (criteria for whats available is made in JS)
     tether.transfer(msg.sender, _balance);
 
-    emit Withdraw(streamId, msg.sender, depositAmountRemaining[msg.sender][_receiver], now);
+    emit Withdraw(streamId, msg.sender, depositAmountRemaining[_sender][msg.sender], now);
   }
 
   function cancel(address _receiver) public {

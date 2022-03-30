@@ -5,8 +5,8 @@ import ReactApexChart from "react-apexcharts";
 import { connect } from "react-redux";
 import { everpayLoadedSelector } from "../store/selectors";
 
-const StreamChart = () => {
-  const [series, setSeries] = useState([70]);
+const StreamChart = (props) => {
+  const [series, setSeries] = useState([0]);
   const [options, setOptions] = useState({
     chart: {
       height: 350,
@@ -24,16 +24,12 @@ const StreamChart = () => {
 
   return (
     <div id="chart">
-      {1 === 2 ? (
-        <ReactApexChart
-          options={options}
-          series={series}
-          type="radialBar"
-          height={350}
-        />
-      ) : (
-        <CreateStream />
-      )}
+      <ReactApexChart
+        options={options}
+        series={[props.balance]}
+        type="radialBar"
+        height={350}
+      />
     </div>
   );
 };

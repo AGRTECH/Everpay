@@ -9,6 +9,9 @@ import {
   streamCreated,
   streamCreating,
   approved,
+  allStreamsLoaded,
+  withdrawCreated,
+  withdrawCreating,
 } from "./actions";
 
 export const loadWeb3 = (dispatch) => {
@@ -56,18 +59,47 @@ export const loadEverpay = async (web3, networkId, dispatch) => {
   }
 };
 
+export const loadAllData = async (everpay, dispatch) => {
+  // Fetch streams with the 'Poll' event stream
+  const streamsCasted = await everpay.getPastEvents("Stream", {
+    fromBlock: 0,
+    toBlock: "latest",
+  });
+  // Format streams
+  const allStreams = streamsCasted.map((event) => event.returnValues);
+  // Add streams to the redux store
+  dispatch(allStreamsLoaded(allStreams));
+};
+
 export const subscribeToEvents = async (everpay, dispatch) => {
   everpay.events.Stream({}, (error, event) => {
     dispatch(streamCreated(event.returnValues));
   });
+
+  everpay.events.Withdraw({}, (error, event) => {
+    dispatch(withdrawCreated(event.returnValues));
+  });
 };
 
 export const showBalances = async (account, tether, everpay) => {
-  let balance = await tether.methods.balanceOf(account).call();
+  let balanceOfReceiver = await tether.methods
+    .balanceOf("0x0BC222D3A061745eec274fCbA390b8f9056Abd6a")
+    .call();
   let balanceOfExchange = await tether.methods
     .balanceOf(tether.options.address)
     .call();
-  console.log("balance account: ", balance);
+  let depositRemainingBalance = await everpay.methods
+    .depositAmountRemaining(
+      account,
+      "0x833458Fa5D6116e1476F56DA758f86aC99219e75"
+    )
+    .call();
+  console.log(
+    "depositRemaining: ",
+    depositRemainingBalance,
+    "Receiver balance: ",
+    balanceOfReceiver
+  );
 };
 
 export const approveFunds = (everpay, tether, deposit, account, dispatch) => {
@@ -105,4 +137,17 @@ export const createStreamFunc = (
         window.alert(`There was an error!`);
       });
   }
+};
+
+export const withdrawFunc = (dispatch, everpay, account, sender, balance) => {
+  everpay.methods
+    .withdraw(balance, sender)
+    .send({ from: account })
+    .on("transactionHash", (hash) => {
+      dispatch(withdrawCreating());
+    })
+    .on("error", (error) => {
+      console.error(error);
+      window.alert(`There was an error!`);
+    });
 };

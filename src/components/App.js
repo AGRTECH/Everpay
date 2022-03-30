@@ -5,11 +5,15 @@ import StreamChart from "./StreamChart";
 import { connect } from "react-redux";
 import {
   loadAccount,
+  loadAccount2,
   loadWeb3,
   loadEverpay,
   loadTether,
   subscribeToEvents,
+  loadAllData,
 } from "../store/interactions";
+import CreateStream from "./CreateStream";
+import ActiveStreams from "./ActiveStreams";
 
 const App = (props) => {
   const [mounted, setMounted] = useState(false);
@@ -26,7 +30,7 @@ const App = (props) => {
         "Token smart contract not detcted on the current network. Please select another network with Metamask"
       );
     } else {
-      // await loadAllData(voting, dispatch);
+      await loadAllData(everpay, dispatch);
       await subscribeToEvents(everpay, dispatch);
     }
   };
@@ -42,7 +46,8 @@ const App = (props) => {
   return (
     <>
       <Navbar />
-      <StreamChart />
+      <CreateStream />
+      <ActiveStreams />
     </>
   );
 };

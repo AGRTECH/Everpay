@@ -6,6 +6,8 @@ function web3(state = {}, action) {
       return { ...state, connection: action.connection };
     case "WEB3_ACCOUNT_LOADED":
       return { ...state, account: action.account };
+    case "WEB3_ACCOUNT_TWO_LOADED":
+      return { ...state, accountTwo: action.account };
     default:
       return state;
   }
@@ -26,8 +28,15 @@ function everpay(state = {}, action) {
       return { ...state, loaded: true, contract: action.contract };
     case "STREAM_CREATING":
       return { ...state, streamCreated: false };
+    case "WITHDRAW_CREATING":
+      return { ...state, withdrawCreated: false };
     case "APPROVED":
       return { ...state, fundsApproved: true };
+    case "ALL_STREAMS_LOADED":
+      return {
+        ...state,
+        streamCreatedData: { loaded: true, data: action.streams },
+      };
     case "STREAM_CREATED":
       if (state.streamCreatedData) {
         data = [...state.streamCreatedData.data, action.streamData];
@@ -43,6 +52,24 @@ function everpay(state = {}, action) {
 
         streamCreatedData: {
           ...state.streamCreatedData,
+          data,
+        },
+      };
+    case "WITHDRAW_CREATED":
+      if (state.withdrawCreatedData) {
+        data = [...state.withdrawCreatedData.data, action.withdrawData];
+        console.log("top", data.length);
+      } else {
+        data = [action.withdrawData];
+        console.log("bot", data.length);
+      }
+
+      return {
+        ...state,
+        withdrawCreated: true,
+
+        withdrawCreatedData: {
+          ...state.withdrawCreatedData,
           data,
         },
       };

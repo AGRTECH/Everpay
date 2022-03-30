@@ -12,6 +12,13 @@ export function web3AccountLoaded(account) {
   };
 }
 
+export function web3AccountTwoLoaded(account) {
+  return {
+    type: "WEB3_ACCOUNT_TWO_LOADED",
+    account,
+  };
+}
+
 export function tetherLoaded(contract) {
   return {
     type: "TETHER_LOADED",
@@ -33,9 +40,22 @@ export function streamCreated(streamData) {
   };
 }
 
+export function withdrawCreated(withdrawData) {
+  return {
+    type: "WITHDRAW_CREATED",
+    withdrawData,
+  };
+}
+
 export function streamCreating() {
   return {
     type: "STREAM_CREATING",
+  };
+}
+
+export function withdrawCreating() {
+  return {
+    type: "WITHDRAW_CREATING",
   };
 }
 
@@ -70,5 +90,12 @@ export function endTimeChanged(time) {
 export function approved() {
   return {
     type: "APPROVED",
+  };
+}
+
+export function allStreamsLoaded(streams) {
+  return {
+    type: "ALL_STREAMS_LOADED",
+    streams,
   };
 }

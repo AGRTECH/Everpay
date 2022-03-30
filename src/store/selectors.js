@@ -4,6 +4,9 @@ import { createSelector } from "reselect";
 const account = (state) => get(state, "web3.account");
 export const accountSelector = createSelector(account, (a) => a);
 
+const accountTwo = (state) => get(state, "web3.accountTwo");
+export const accountTwoSelector = createSelector(accountTwo, (a) => a);
+
 const web3 = (state) => get(state, "web3.connection");
 export const web3Selector = createSelector(web3, (w) => w);
 
@@ -33,3 +36,13 @@ export const endTimeSelector = createSelector(endTime, (e) => e);
 
 const approved = (state) => get(state, "everpay.fundsApproved", false);
 export const approvedSelector = createSelector(approved, (e) => e);
+
+const allStreams = (state) => get(state, "everpay.streamCreatedData", []);
+export const allStreamsSelector = createSelector(allStreams, (e) => e);
+
+const allStreamsLoaded = (state) =>
+  get(state, "everpay.streamCreatedData.loaded", false);
+export const allStreamsLoadedSelector = createSelector(
+  allStreamsLoaded,
+  (e) => e
+);
