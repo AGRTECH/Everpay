@@ -30,6 +30,8 @@ function everpay(state = {}, action) {
       return { ...state, streamCreated: false };
     case "WITHDRAW_CREATING":
       return { ...state, withdrawCreated: false };
+    case "CANCEL_CREATING":
+      return { ...state, cancelCreated: false };
     case "APPROVED":
       return { ...state, fundsApproved: true };
     case "ALL_STREAMS_LOADED":
@@ -40,10 +42,8 @@ function everpay(state = {}, action) {
     case "STREAM_CREATED":
       if (state.streamCreatedData) {
         data = [...state.streamCreatedData.data, action.streamData];
-        console.log("top", data.length);
       } else {
         data = [action.streamData];
-        console.log("bot", data.length);
       }
 
       return {
@@ -58,10 +58,8 @@ function everpay(state = {}, action) {
     case "WITHDRAW_CREATED":
       if (state.withdrawCreatedData) {
         data = [...state.withdrawCreatedData.data, action.withdrawData];
-        console.log("top", data.length);
       } else {
         data = [action.withdrawData];
-        console.log("bot", data.length);
       }
 
       return {
@@ -70,6 +68,22 @@ function everpay(state = {}, action) {
 
         withdrawCreatedData: {
           ...state.withdrawCreatedData,
+          data,
+        },
+      };
+    case "CANCEL_CREATED":
+      if (state.cancelCreatedData) {
+        data = [...state.cancelCreatedData.data, action.cancelData];
+      } else {
+        data = [action.cancelData];
+      }
+
+      return {
+        ...state,
+        cancelCreated: true,
+
+        cancelCreatedData: {
+          ...state.cancelCreatedData,
           data,
         },
       };

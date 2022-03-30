@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   everpaySelector,
@@ -27,17 +27,12 @@ import {
   recipientAddressChanged,
   endTimeChanged,
 } from "../store/actions";
-import Timer from "./Timer";
-import Streaming from "./Streaming";
 
 const CreateStream = (props) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  let tempDeposit = 4000;
-  let tempRate = 1000;
 
   const {
     dispatch,
@@ -58,19 +53,24 @@ const CreateStream = (props) => {
   return (
     <>
       {everpayLoaded && tetherLoaded ? (
-        <div>
+        <div className="container-1 shadow">
           <h1>Create A Stream Here</h1>
-          <button
+          {/* <button
             onClick={() => {
               showBalances(account, tether, everpay);
             }}
           >
             Show Balances
-          </button>
+          </button> */}
           <Button variant="primary" onClick={handleShow}>
             Stream!
           </Button>
-          <Modal show={show} onHide={handleClose}>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+          >
             <Modal.Header closeButton>
               <Modal.Title>Create Stream</Modal.Title>
             </Modal.Header>
@@ -92,7 +92,6 @@ const CreateStream = (props) => {
                       href="#/action-1"
                       onClick={(e) => {
                         dispatch(tokenChanged(tether._address));
-                        console.log(tether._address);
                       }}
                     >
                       Tether
@@ -131,7 +130,7 @@ const CreateStream = (props) => {
                     Time interval (in seconds)
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu className="dropdown-menu-scroll">
                     <Dropdown.Item
                       href="#/action-1"
                       onClick={(e) => {
@@ -236,6 +235,7 @@ const CreateStream = (props) => {
                     endTime,
                     approved
                   );
+                  handleClose();
                 }}
               >
                 Finalize
@@ -244,7 +244,7 @@ const CreateStream = (props) => {
           </Modal>
         </div>
       ) : (
-        <div>Not loaded</div>
+        <div>Contracts Not loaded</div>
       )}
     </>
   );

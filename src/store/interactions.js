@@ -12,6 +12,8 @@ import {
   allStreamsLoaded,
   withdrawCreated,
   withdrawCreating,
+  cancelCreated,
+  cancelCreating,
 } from "./actions";
 
 export const loadWeb3 = (dispatch) => {
@@ -79,6 +81,10 @@ export const subscribeToEvents = async (everpay, dispatch) => {
   everpay.events.Withdraw({}, (error, event) => {
     dispatch(withdrawCreated(event.returnValues));
   });
+
+  everpay.events.Cancel({}, (error, event) => {
+    dispatch(cancelCreated(event.returnValues));
+  });
 };
 
 export const showBalances = async (account, tether, everpay) => {
@@ -90,8 +96,8 @@ export const showBalances = async (account, tether, everpay) => {
     .call();
   let depositRemainingBalance = await everpay.methods
     .depositAmountRemaining(
-      account,
-      "0x833458Fa5D6116e1476F56DA758f86aC99219e75"
+      "0xD87e08b6f01A3134CBDe6851A244b26aB10B0c8F",
+      account
     )
     .call();
   console.log(
@@ -145,6 +151,19 @@ export const withdrawFunc = (dispatch, everpay, account, sender, balance) => {
     .send({ from: account })
     .on("transactionHash", (hash) => {
       dispatch(withdrawCreating());
+    })
+    .on("error", (error) => {
+      console.error(error);
+      window.alert(`There was an error!`);
+    });
+};
+
+export const cancelFunc = (dispatch, everpay, account, receiver) => {
+  everpay.methods
+    .cancel(receiver)
+    .send({ from: account })
+    .on("transactionHash", (hash) => {
+      dispatch(cancelCreating());
     })
     .on("error", (error) => {
       console.error(error);

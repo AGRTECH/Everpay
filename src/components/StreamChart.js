@@ -1,12 +1,10 @@
 import "./App.css";
 import React, { useState } from "react";
-import CreateStream from "./CreateStream";
 import ReactApexChart from "react-apexcharts";
 import { connect } from "react-redux";
 import { everpayLoadedSelector } from "../store/selectors";
 
 const StreamChart = (props) => {
-  const [series, setSeries] = useState([0]);
   const [options, setOptions] = useState({
     chart: {
       height: 350,
@@ -23,7 +21,7 @@ const StreamChart = (props) => {
   });
 
   return (
-    <div id="chart">
+    <div id="chart" className="">
       <ReactApexChart
         options={options}
         series={[props.balance]}

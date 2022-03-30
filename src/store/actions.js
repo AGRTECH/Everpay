@@ -47,6 +47,13 @@ export function withdrawCreated(withdrawData) {
   };
 }
 
+export function cancelCreated(cancelData) {
+  return {
+    type: "CANCEL_CREATED",
+    cancelData,
+  };
+}
+
 export function streamCreating() {
   return {
     type: "STREAM_CREATING",
@@ -56,6 +63,12 @@ export function streamCreating() {
 export function withdrawCreating() {
   return {
     type: "WITHDRAW_CREATING",
+  };
+}
+
+export function cancelCreating() {
+  return {
+    type: "CANCEL_CREATING",
   };
 }
 

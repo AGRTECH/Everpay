@@ -46,8 +46,8 @@ const App = (props) => {
   return (
     <>
       <Navbar />
-      <CreateStream />
       <ActiveStreams />
+      <CreateStream />
     </>
   );
 };

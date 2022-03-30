@@ -1,5 +1,29 @@
-.navshadow {
+.shadow {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   font-family: "Kanit", sans-serif;
   font-weight: bold;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(1, 0, 0, 0.05);
+  padding: 50px 50px 50px 50px;
+  margin-top: 175px;
+}
+
+.container-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(1, 0, 0, 0.05);
+  padding: 50px 50px 15px 50px;
+  margin: 50px 100px 0 100px;
+}
+
+.dropdown-menu-scroll {
+  height: 150px;
+  overflow-y: scroll;
 }

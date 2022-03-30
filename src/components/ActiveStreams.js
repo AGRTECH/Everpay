@@ -1,5 +1,4 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
   everpaySelector,
@@ -15,37 +14,41 @@ import {
   allStreamsSelector,
   allStreamsLoadedSelector,
 } from "../store/selectors";
-import {
-  createStreamFunc,
-  approveFunds,
-  showBalances,
-} from "../store/interactions";
-import { Button, Modal, Dropdown } from "react-bootstrap";
-import {
-  tokenChanged,
-  streamAmountChanged,
-  recipientAddressChanged,
-  endTimeChanged,
-} from "../store/actions";
-import Timer from "./Timer";
 import Streaming from "./Streaming";
-import StreamChart from "./StreamChart";
 
 const ActiveStreams = (props) => {
   const renderStream = (stream, props) => {
     const { dispatch, everpay, account } = props;
-    if (account === stream._receiver) {
+    if (account === stream._receiver && stream._isStreaming) {
       return (
-        <>
+        <div className="container-1 shadow" key={stream._streamId}>
+          <h3>Your Incoming Stream</h3>
           <Streaming
             streamDeposit={parseInt(stream._deposit)}
             streamRatePerSecond={parseInt(stream._rate)}
             streamSender={stream._sender}
+            streamReceiver={stream._receiver}
+            currentAccount={account}
+            streamReceiverBalance={stream._streamBalanceOf}
           />
-        </>
+        </div>
+      );
+    } else if (account === stream._sender && stream._isStreaming) {
+      return (
+        <div className="container-1 shadow">
+          <h3>Your Created Stream</h3>
+          <Streaming
+            streamDeposit={parseInt(stream._deposit)}
+            streamRatePerSecond={parseInt(stream._rate)}
+            streamSender={stream._sender}
+            streamReceiver={stream._receiver}
+            currentAccount={account}
+            streamReceiverBalance={stream._streamBalanceOf}
+          />
+        </div>
       );
     } else {
-      return <div>You aren't being streamed to currently</div>;
+      return <></>;
     }
   };
   const showStreams = (props) => {
@@ -53,11 +56,12 @@ const ActiveStreams = (props) => {
 
     return (
       <div>
-        <h1>Your Stream</h1>
         {allStreamsLoaded && allStreams.data.length > 0 ? (
           allStreams.data.map((stream) => renderStream(stream, props))
         ) : (
-          <p>No streams to show...</p>
+          <p className="container shadow">
+            No outgoing or incoming streams on this account!
+          </p>
         )}
       </div>
     );
@@ -69,7 +73,9 @@ const ActiveStreams = (props) => {
         {props.allStreamsLoaded ? (
           showStreams(props)
         ) : (
-          <p>"No active streams right now..."</p>
+          <p className="container">
+            No outgoing or incoming streams on this account!
+          </p>
         )}
       </div>
     </>

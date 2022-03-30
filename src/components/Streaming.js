@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import StreamChart from "./StreamChart";
-import { withdrawFunc } from "../store/interactions";
+import { withdrawFunc, cancelFunc } from "../store/interactions";
 import { everpaySelector, accountSelector } from "../store/selectors";
+import { Button } from "react-bootstrap";
 
 const Streaming = (props) => {
-  const [balance, setBalance] = useState(0);
+  // parseInt(props.streamReceiverBalance)
+  let receiverStreamBalance = parseInt(props.streamReceiverBalance);
+  const [balance, setBalance] = useState(receiverStreamBalance);
+  console.log(parseInt(props.streamReceiverBalance));
   useEffect(() => {
     let interval;
     interval = setInterval(() => {
@@ -25,21 +29,38 @@ const Streaming = (props) => {
   let formattedBalance = (balance / props.streamDeposit) * 100;
   return (
     <>
-      <p>{isNaN(balance) ? "No stream active" : balance}</p>
+      {/* <p>{isNaN(balance) ? "No stream active" : balance}</p> */}
       <StreamChart balance={formattedBalance} />
-      <button
-        onClick={(e) => {
-          withdrawFunc(
-            props.dispatch,
-            props.everpay,
-            props.account,
-            props.streamSender,
-            balance
-          );
-        }}
-      >
-        Withdraw Balance
-      </button>
+      {props.currentAccount === props.streamReceiver ? (
+        <Button
+          variant="primary"
+          onClick={(e) => {
+            withdrawFunc(
+              props.dispatch,
+              props.everpay,
+              props.account,
+              props.streamSender,
+              balance
+            );
+          }}
+        >
+          Withdraw Balance
+        </Button>
+      ) : (
+        <Button
+          variant="danger"
+          onClick={(e) => {
+            cancelFunc(
+              props.dispatch,
+              props.everpay,
+              props.account,
+              props.streamReceiver
+            );
+          }}
+        >
+          Cancel Stream
+        </Button>
+      )}
     </>
   );
 };

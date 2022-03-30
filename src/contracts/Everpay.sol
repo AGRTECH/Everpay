@@ -14,7 +14,7 @@ contract Everpay {
    address public owner;
    Tether public tether;
    uint256 public streamId;
-   mapping(address => mapping(address => uint))public streamBalanceOf;
+   mapping(uint => mapping(address => uint))public streamBalanceOf;
    mapping(address => mapping(address => uint)) public depositAmountRemaining;
    mapping(uint256 => _Stream) public streams;
    mapping(address => bool) public isStreaming;
@@ -35,12 +35,14 @@ contract Everpay {
 
   event Stream(
     uint256 _streamId,
+    bool _isStreaming,
     address _sender, 
     address _receiver, 
     uint256 _deposit, 
     address _token,
     uint256 _rate,
     uint256 _depositRemaining,
+    uint256 _streamBalanceOf,
     uint256 _endTime,
     uint256 _timestamp
   );
@@ -57,6 +59,7 @@ contract Everpay {
     uint256 _streamId,
     address _receiver, 
     uint256 _depositAmountRemaining, 
+    uint256 _streamBalanceOf,
     uint256 _timestamp
   );
 
@@ -79,15 +82,6 @@ contract Everpay {
     // Create rate per second
     uint _dividedAmount = _deposit.div(_endTime);
 
-    // Transfer divided amount from contract to receiver
-    // tether.transfer(_receiver, _dividedAmount);
-
-    // Update current stream balance of this particular sender to receiver
-    // streamBalanceOf[msg.sender][_receiver] = streamBalanceOf[msg.sender][_receiver].add(_dividedAmount);
-
-    //  Store and sub deposit amount remaining in mapping
-    // depositAmountRemaining[msg.sender][_receiver] = depositAmountRemaining[msg.sender][_receiver].sub(_dividedAmount);
-
     //  Set streaming to true for receiver address
     isStreaming[_receiver] = true;
 
@@ -97,22 +91,31 @@ contract Everpay {
     // Add stream to stream mapping
     streams[streamId] = _Stream(_deposit, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], _endTime, _receiver, msg.sender, _token);
 
-    emit Stream(streamId, msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], _endTime, now);
+    emit Stream(streamId, isStreaming[_receiver], msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], streamBalanceOf[streamId][msg.sender], _endTime, now);
   }
 
   function withdraw(uint _balance, address _sender) public {
     require(_balance > 0);
     require(isStreaming[msg.sender] == true);
+    require(depositAmountRemaining[_sender][msg.sender] >= _balance);
 
-    // Transfer available balance to receiver (criteria for whats available is made in JS)
+    // Subtract from depositAmountRemaining
+    depositAmountRemaining[_sender][msg.sender] = depositAmountRemaining[_sender][msg.sender].sub(_balance);
+
+    // Add to current stream balance incase receiver withdraws midway through stream
+    streamBalanceOf[streamId][msg.sender] = streamBalanceOf[streamId][msg.sender].add(_balance);
+
+    // Transfer available balance to receiver (criteria for whats available to withdraw is made in JS)
+    _balance = _balance.sub(streamBalanceOf[streamId][msg.sender]);
     tether.transfer(msg.sender, _balance);
 
-    emit Withdraw(streamId, msg.sender, depositAmountRemaining[_sender][msg.sender], now);
+    emit Withdraw(streamId, msg.sender, depositAmountRemaining[_sender][msg.sender], streamBalanceOf[streamId][msg.sender],  now);
   }
 
   function cancel(address _receiver) public {
     // Has to be streaming to be able to cancel
     require(isStreaming[_receiver]);
+    require(depositAmountRemaining[msg.sender][_receiver] > 0);
 
     // After cancel, receiver won't be streaming anymore
     isStreaming[_receiver] = false;
@@ -120,8 +123,9 @@ contract Everpay {
     // Transfer remaing deposit back to sender from contract
     tether.transfer(msg.sender, depositAmountRemaining[msg.sender][_receiver]);
 
-    // Reset stream balance of receiver for this sender
-    streamBalanceOf[msg.sender][_receiver] = 0;
+    // Reset stream balance and depositAmountRemaining of receiver for this sender
+    streamBalanceOf[streamId][_receiver] = 0;
+    depositAmountRemaining[msg.sender][_receiver] = 0;
 
     emit Cancel(streamId, msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], now);
   }

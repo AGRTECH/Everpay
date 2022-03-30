@@ -5,7 +5,7 @@ import React from "react";
 
 const Navbar = (props) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary navshadow">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top">
       <a className="navbar-brand" href="/#">
         Everpay
       </a>
