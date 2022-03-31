@@ -46,3 +46,23 @@ export const allStreamsLoadedSelector = createSelector(
   allStreamsLoaded,
   (e) => e
 );
+
+const allWithdrawls = (state) => get(state, "everpay.withdrawCreatedData", []);
+export const allWithdrawlsSelector = createSelector(allWithdrawls, (e) => e);
+
+const allWithdrawlsLoaded = (state) =>
+  get(state, "everpay.withdrawCreatedData.loaded", false);
+export const allWithdrawlsLoadedSelector = createSelector(
+  allWithdrawlsLoaded,
+  (e) => e
+);
+
+const allCancels = (state) => get(state, "everpay.cancelCreatedData", []);
+export const allCancelsSelector = createSelector(allCancels, (e) => e);
+
+const allCancelsLoaded = (state) =>
+  get(state, "everpay.cancelCreatedData.loaded", false);
+export const allCancelsLoadedSelector = createSelector(
+  allCancelsLoaded,
+  (e) => e
+);

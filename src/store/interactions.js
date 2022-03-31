@@ -14,6 +14,8 @@ import {
   withdrawCreating,
   cancelCreated,
   cancelCreating,
+  allWithdrawlsLoaded,
+  allCancelsLoaded,
 } from "./actions";
 
 export const loadWeb3 = (dispatch) => {
@@ -62,7 +64,7 @@ export const loadEverpay = async (web3, networkId, dispatch) => {
 };
 
 export const loadAllData = async (everpay, dispatch) => {
-  // Fetch streams with the 'Poll' event stream
+  // Fetch streams with the 'Stream' event stream
   const streamsCasted = await everpay.getPastEvents("Stream", {
     fromBlock: 0,
     toBlock: "latest",
@@ -71,6 +73,25 @@ export const loadAllData = async (everpay, dispatch) => {
   const allStreams = streamsCasted.map((event) => event.returnValues);
   // Add streams to the redux store
   dispatch(allStreamsLoaded(allStreams));
+
+  // Fetch withdrawls with the 'Withdraw' event stream
+  const withdrawlStream = await everpay.getPastEvents("Withdraw", {
+    fromBlock: 0,
+    toBlock: "latest",
+  });
+  // Format withdrawls
+  const allWithdrawls = withdrawlStream.map((event) => event.returnValues);
+  // Add withdrawls to the redux store
+  dispatch(allWithdrawlsLoaded(allWithdrawls));
+  // Fetch cancels with the 'Cancel' event stream
+  const cancelStream = await everpay.getPastEvents("Cancel", {
+    fromBlock: 0,
+    toBlock: "latest",
+  });
+  // Format withdrawls
+  const allCancels = cancelStream.map((event) => event.returnValues);
+  // Add withdrawls to the redux store
+  dispatch(allCancelsLoaded(allCancels));
 };
 
 export const subscribeToEvents = async (everpay, dispatch) => {
@@ -87,10 +108,8 @@ export const subscribeToEvents = async (everpay, dispatch) => {
   });
 };
 
-export const showBalances = async (account, tether, everpay) => {
-  let balanceOfReceiver = await tether.methods
-    .balanceOf("0x0BC222D3A061745eec274fCbA390b8f9056Abd6a")
-    .call();
+export const showBalances = async (dispatch, account, tether, everpay) => {
+  let balanceOfReceiver = await tether.methods.balanceOf(account).call();
   let balanceOfExchange = await tether.methods
     .balanceOf(tether.options.address)
     .call();
@@ -100,9 +119,10 @@ export const showBalances = async (account, tether, everpay) => {
       account
     )
     .call();
+
   console.log(
-    "depositRemaining: ",
-    depositRemainingBalance,
+    // "depositRemaining: ",
+    // depositRemainingBalance,
     "Receiver balance: ",
     balanceOfReceiver
   );

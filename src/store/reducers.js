@@ -39,6 +39,16 @@ function everpay(state = {}, action) {
         ...state,
         streamCreatedData: { loaded: true, data: action.streams },
       };
+    case "ALL_WITHDRAWLS_LOADED":
+      return {
+        ...state,
+        withdrawCreatedData: { loaded: true, data: action.withdrawls },
+      };
+    case "ALL_CANCELS_LOADED":
+      return {
+        ...state,
+        cancelCreatedData: { loaded: true, data: action.cancels },
+      };
     case "STREAM_CREATED":
       if (state.streamCreatedData) {
         data = [...state.streamCreatedData.data, action.streamData];

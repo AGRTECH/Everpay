@@ -10,7 +10,6 @@ const Streaming = (props) => {
   // parseInt(props.streamReceiverBalance)
   let receiverStreamBalance = parseInt(props.streamReceiverBalance);
   const [balance, setBalance] = useState(receiverStreamBalance);
-  console.log(parseInt(props.streamReceiverBalance));
   useEffect(() => {
     let interval;
     interval = setInterval(() => {
@@ -32,20 +31,25 @@ const Streaming = (props) => {
       {/* <p>{isNaN(balance) ? "No stream active" : balance}</p> */}
       <StreamChart balance={formattedBalance} />
       {props.currentAccount === props.streamReceiver ? (
-        <Button
-          variant="primary"
-          onClick={(e) => {
-            withdrawFunc(
-              props.dispatch,
-              props.everpay,
-              props.account,
-              props.streamSender,
-              balance
-            );
-          }}
-        >
-          Withdraw Balance
-        </Button>
+        <>
+          <Button
+            variant="primary"
+            onClick={(e) => {
+              withdrawFunc(
+                props.dispatch,
+                props.everpay,
+                props.account,
+                props.streamSender,
+                balance
+              );
+            }}
+          >
+            Withdraw Balance
+          </Button>
+          <p>
+            Withdrawn: {receiverStreamBalance} / {props.streamDeposit}
+          </p>
+        </>
       ) : (
         <Button
           variant="danger"

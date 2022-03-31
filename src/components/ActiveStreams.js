@@ -13,13 +13,37 @@ import {
   approvedSelector,
   allStreamsSelector,
   allStreamsLoadedSelector,
+  allWithdrawlsLoadedSelector,
+  allWithdrawlsSelector,
+  allCancelsSelector,
+  allCancelsLoadedSelector,
 } from "../store/selectors";
 import Streaming from "./Streaming";
 
 const ActiveStreams = (props) => {
   const renderStream = (stream, props) => {
-    const { dispatch, everpay, account } = props;
-    if (account === stream._receiver && stream._isStreaming) {
+    const {
+      dispatch,
+      everpay,
+      account,
+      allWithdrawls,
+      allWithdrawlsLoaded,
+      allStreamsLoaded,
+    } = props;
+    let formattedWithdrawls;
+    if (
+      allWithdrawlsLoaded &&
+      stream._isStreaming &&
+      allWithdrawls.data.length > 0
+    ) {
+      formattedWithdrawls = allWithdrawls.data.map((withdrawl) => withdrawl);
+    }
+    if (
+      account === stream._receiver &&
+      stream._isStreaming &&
+      allWithdrawlsLoaded &&
+      allStreamsLoaded
+    ) {
       return (
         <div className="container-1 shadow" key={stream._streamId}>
           <h3>Your Incoming Stream</h3>
@@ -29,11 +53,22 @@ const ActiveStreams = (props) => {
             streamSender={stream._sender}
             streamReceiver={stream._receiver}
             currentAccount={account}
-            streamReceiverBalance={stream._streamBalanceOf}
+            streamReceiverBalance={
+              allWithdrawls.data.length > 0
+                ? parseInt(
+                    formattedWithdrawls[formattedWithdrawls.length - 1][3]
+                  )
+                : 0
+            }
           />
         </div>
       );
-    } else if (account === stream._sender && stream._isStreaming) {
+    } else if (
+      account === stream._sender &&
+      stream._isStreaming &&
+      allWithdrawlsLoaded &&
+      allStreamsLoaded
+    ) {
       return (
         <div className="container-1 shadow">
           <h3>Your Created Stream</h3>
@@ -43,7 +78,13 @@ const ActiveStreams = (props) => {
             streamSender={stream._sender}
             streamReceiver={stream._receiver}
             currentAccount={account}
-            streamReceiverBalance={stream._streamBalanceOf}
+            streamReceiverBalance={
+              allWithdrawls.data.length > 0
+                ? parseInt(
+                    formattedWithdrawls[formattedWithdrawls.length - 1][3]
+                  )
+                : 0
+            }
           />
         </div>
       );
@@ -52,7 +93,8 @@ const ActiveStreams = (props) => {
     }
   };
   const showStreams = (props) => {
-    const { allStreams, allStreamsLoaded } = props;
+    const { allStreams, allStreamsLoaded, allWithdrawls, allWithdrawlsLoaded } =
+      props;
 
     return (
       <div>
@@ -95,6 +137,10 @@ function mapStateToProps(state) {
     approved: approvedSelector(state),
     allStreams: allStreamsSelector(state),
     allStreamsLoaded: allStreamsLoadedSelector(state),
+    allWithdrawlsLoaded: allWithdrawlsLoadedSelector(state),
+    allWithdrawls: allWithdrawlsSelector(state),
+    allCancels: allCancelsSelector(state),
+    allCancelsLoaded: allCancelsLoadedSelector(state),
   };
 }
 

@@ -49,6 +49,7 @@ contract Everpay {
 
   event Cancel(
     uint256 _streamId,
+    bool _isStreaming,
     address _sender, 
     address _receiver, 
     uint256 _depositAmountRemaining, 
@@ -97,16 +98,17 @@ contract Everpay {
   function withdraw(uint _balance, address _sender) public {
     require(_balance > 0);
     require(isStreaming[msg.sender] == true);
+    // Transfer available balance to receiver (criteria for whats available to withdraw is made in JS)
+    _balance = _balance.sub(streamBalanceOf[streamId][msg.sender]);
     require(depositAmountRemaining[_sender][msg.sender] >= _balance);
 
     // Subtract from depositAmountRemaining
     depositAmountRemaining[_sender][msg.sender] = depositAmountRemaining[_sender][msg.sender].sub(_balance);
 
+
     // Add to current stream balance incase receiver withdraws midway through stream
     streamBalanceOf[streamId][msg.sender] = streamBalanceOf[streamId][msg.sender].add(_balance);
 
-    // Transfer available balance to receiver (criteria for whats available to withdraw is made in JS)
-    _balance = _balance.sub(streamBalanceOf[streamId][msg.sender]);
     tether.transfer(msg.sender, _balance);
 
     emit Withdraw(streamId, msg.sender, depositAmountRemaining[_sender][msg.sender], streamBalanceOf[streamId][msg.sender],  now);
@@ -127,6 +129,6 @@ contract Everpay {
     streamBalanceOf[streamId][_receiver] = 0;
     depositAmountRemaining[msg.sender][_receiver] = 0;
 
-    emit Cancel(streamId, msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], now);
+    emit Cancel(streamId, isStreaming[_receiver], msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], now);
   }
 }

@@ -112,3 +112,17 @@ export function allStreamsLoaded(streams) {
     streams,
   };
 }
+
+export function allWithdrawlsLoaded(withdrawls) {
+  return {
+    type: "ALL_WITHDRAWLS_LOADED",
+    withdrawls,
+  };
+}
+
+export function allCancelsLoaded(cancels) {
+  return {
+    type: "ALL_CANCELS_LOADED",
+    cancels,
+  };
+}
