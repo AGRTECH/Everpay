@@ -57,13 +57,13 @@ const CreateStream = (props) => {
       {everpayLoaded && tetherLoaded ? (
         <div className="container-1 shadow">
           <h1>Create A Stream Here</h1>
-          <button
+          {/* <button
             onClick={() => {
               showBalances(dispatch, account, tether, everpay);
             }}
           >
             Show Balances
-          </button>
+          </button> */}
           <Button variant="primary" onClick={handleShow}>
             Stream!
           </Button>

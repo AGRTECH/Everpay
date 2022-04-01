@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Web3 from "web3";
 import { connect } from "react-redux";
 import "./App.css";
 import StreamChart from "./StreamChart";
@@ -16,8 +17,14 @@ import {
 import { Button } from "react-bootstrap";
 
 const Streaming = (props) => {
+  const web3 = new Web3(window.ethereum);
+  function tokens(number) {
+    return web3.utils.fromWei(number, "ether");
+  }
   let receiverStreamBalance = parseInt(props.streamReceiverBalance);
-  const [balance, setBalance] = useState(receiverStreamBalance);
+  const [balance, setBalance] = useState(
+    Math.ceil(props.streamReceiverBalance / 10 ** 18) * 10 ** 18
+  );
   useEffect(() => {
     let interval;
     interval = setInterval(() => {
@@ -40,7 +47,7 @@ const Streaming = (props) => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(balance);
+  console.log(balance / 10 ** 18);
   // let localStorageBalance;
   // if (
   //   localStorage.getItem(`balance${props.streamId}`) <
@@ -58,6 +65,9 @@ const Streaming = (props) => {
   //   );
   // }
   let formattedBalance = (balance / props.streamDeposit) * 100;
+  let noDecimalBalance = Math.ceil(parseInt(balance));
+  let noDecimalDeposit = Math.ceil(parseInt(props.streamDeposit));
+  console.log(Math.ceil(props.streamReceiverBalance / 10 ** 18));
   return (
     <>
       {/* <p>{isNaN(balance) ? "No stream active" : balance}</p> */}
@@ -72,7 +82,7 @@ const Streaming = (props) => {
                 props.everpay,
                 props.account,
                 props.streamSender,
-                balance
+                balance / 10 ** 18
               );
               // localStorage.removeItem(`balance${props.streamId}`);
             }}
@@ -81,10 +91,12 @@ const Streaming = (props) => {
           </Button>
           <div className="flex-text">
             <p className="mr-4">
-              Sent: {balance} / {props.streamDeposit}
+              Sent: {Math.ceil(balance / 10 ** 18)} /
+              {Math.ceil(props.streamDeposit / 10 ** 18)}
             </p>
             <p>
-              Withdrawn: {receiverStreamBalance} / {props.streamDeposit}
+              Withdrawn: {Math.ceil(props.streamReceiverBalance / 10 ** 18)} /
+              {Math.ceil(props.streamDeposit / 10 ** 18)}
             </p>
           </div>
         </>
@@ -112,10 +124,12 @@ const Streaming = (props) => {
           </Button>
           <div className="flex-text">
             <p className="mr-4">
-              Sent: {balance} / {props.streamDeposit}
+              Sent: {Math.ceil(balance / 10 ** 18)} /
+              {Math.ceil(props.streamDeposit / 10 ** 18)}
             </p>
             <p>
-              Withdrawn: {receiverStreamBalance} / {props.streamDeposit}
+              Withdrawn: {Math.ceil(props.streamReceiverBalance / 10 ** 18)} /
+              {Math.ceil(props.streamDeposit / 10 ** 18)}
             </p>
           </div>
         </>

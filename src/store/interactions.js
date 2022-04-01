@@ -130,11 +130,16 @@ export const showBalances = async (dispatch, account, tether, everpay) => {
       Math.ceil(web3.utils.fromWei(balanceOfAccount, "ether"))
     )
   );
+  console.log(balanceOfAccount);
 };
 
 export const approveFunds = (everpay, tether, deposit, account, dispatch) => {
+  const web3 = new Web3(window.ethereum);
   tether.methods
-    .approve(everpay.options.address, deposit)
+    .approve(
+      everpay.options.address,
+      web3.utils.toWei(deposit.toString(), "ether")
+    )
     .send({ from: account })
     .on("transactionHash", (hash) => {
       dispatch(approved());
@@ -176,8 +181,9 @@ export const createStreamFunc = (
 };
 
 export const withdrawFunc = (dispatch, everpay, account, sender, balance) => {
+  const web3 = new Web3(window.ethereum);
   everpay.methods
-    .withdraw(balance, sender)
+    .withdraw(web3.utils.toWei(balance.toString(), "ether"), sender)
     .send({ from: account })
     .on("transactionHash", (hash) => {
       dispatch(withdrawCreating());
