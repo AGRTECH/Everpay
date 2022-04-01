@@ -1,4 +1,5 @@
 import "./App.css";
+import Web3 from "web3";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
@@ -56,13 +57,13 @@ const CreateStream = (props) => {
       {everpayLoaded && tetherLoaded ? (
         <div className="container-1 shadow">
           <h1>Create A Stream Here</h1>
-          {/* <button
+          <button
             onClick={() => {
               showBalances(dispatch, account, tether, everpay);
-            }} */}
-          {/* >
+            }}
+          >
             Show Balances
-          </button> */}
+          </button>
           <Button variant="primary" onClick={handleShow}>
             Stream!
           </Button>

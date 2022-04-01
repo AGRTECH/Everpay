@@ -27,3 +27,8 @@
   height: 150px;
   overflow-y: scroll;
 }
+
+.flex-text {
+  display: flex;
+  flex-direction: row;
+}

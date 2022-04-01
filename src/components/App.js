@@ -5,15 +5,16 @@ import StreamChart from "./StreamChart";
 import { connect } from "react-redux";
 import {
   loadAccount,
-  loadAccount2,
   loadWeb3,
   loadEverpay,
   loadTether,
   subscribeToEvents,
   loadAllData,
+  showBalances,
 } from "../store/interactions";
 import CreateStream from "./CreateStream";
 import ActiveStreams from "./ActiveStreams";
+import ParticlesBg from "particles-bg";
 
 const App = (props) => {
   const [mounted, setMounted] = useState(false);
@@ -21,7 +22,7 @@ const App = (props) => {
   const loadBlockchainData = async (dispatch) => {
     const web3 = loadWeb3(dispatch);
     await web3.eth.net.getNetworkType();
-    await loadAccount(web3, dispatch);
+    const account = await loadAccount(web3, dispatch);
     const networkId = await web3.eth.net.getId();
     const everpay = await loadEverpay(web3, networkId, dispatch);
     const tether = await loadTether(web3, networkId, dispatch);
@@ -32,6 +33,7 @@ const App = (props) => {
     } else {
       await loadAllData(everpay, dispatch);
       await subscribeToEvents(everpay, dispatch);
+      await showBalances(dispatch, account, tether, everpay);
     }
   };
 

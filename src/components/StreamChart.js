@@ -24,7 +24,7 @@ const StreamChart = (props) => {
     <div id="chart" className="">
       <ReactApexChart
         options={options}
-        series={[props.balance]}
+        series={[Math.ceil(props.balance)]}
         type="radialBar"
         height={350}
       />

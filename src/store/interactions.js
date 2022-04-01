@@ -17,6 +17,7 @@ import {
   allWithdrawlsLoaded,
   allCancelsLoaded,
   streamingStatusChanged,
+  accountBalanceChanged,
 } from "./actions";
 
 export const loadWeb3 = (dispatch) => {
@@ -110,7 +111,11 @@ export const subscribeToEvents = async (everpay, dispatch) => {
 };
 
 export const showBalances = async (dispatch, account, tether, everpay) => {
-  let balanceOfReceiver = await tether.methods.balanceOf(account).call();
+  const web3 = new Web3(window.ethereum);
+  // function tokens(number) {
+  //   return web3.utils.toWei(number, "ether");
+  // }
+  let balanceOfAccount = await tether.methods.balanceOf(account).call();
   let balanceOfExchange = await tether.methods
     .balanceOf(tether.options.address)
     .call();
@@ -120,12 +125,10 @@ export const showBalances = async (dispatch, account, tether, everpay) => {
       account
     )
     .call();
-
-  console.log(
-    // "depositRemaining: ",
-    // depositRemainingBalance,
-    "Receiver balance: ",
-    balanceOfReceiver
+  dispatch(
+    accountBalanceChanged(
+      Math.ceil(web3.utils.fromWei(balanceOfAccount, "ether"))
+    )
   );
 };
 
@@ -153,8 +156,14 @@ export const createStreamFunc = (
   approved
 ) => {
   if (approved) {
+    const web3 = new Web3(window.ethereum);
     everpay.methods
-      .stream(receiver, deposit, streamToken, endTime)
+      .stream(
+        receiver,
+        web3.utils.toWei(deposit.toString(), "ether"),
+        streamToken,
+        endTime
+      )
       .send({ from: account })
       .on("transactionHash", (hash) => {
         dispatch(streamCreating());

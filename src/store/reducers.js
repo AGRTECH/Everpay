@@ -6,8 +6,8 @@ function web3(state = {}, action) {
       return { ...state, connection: action.connection };
     case "WEB3_ACCOUNT_LOADED":
       return { ...state, account: action.account };
-    case "WEB3_ACCOUNT_TWO_LOADED":
-      return { ...state, accountTwo: action.account };
+    case "ACCOUNT_BALANCE_CHANGED":
+      return { ...state, accountBalance: action.balance };
     default:
       return state;
   }

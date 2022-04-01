@@ -1,6 +1,10 @@
 import "./App.css";
 import { connect } from "react-redux";
-import { accountSelector, everpayLoadedSelector } from "../store/selectors";
+import {
+  accountSelector,
+  everpayLoadedSelector,
+  accountBalanceSelector,
+} from "../store/selectors";
 import React from "react";
 
 const Navbar = (props) => {
@@ -11,19 +15,25 @@ const Navbar = (props) => {
       </a>
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
+          <p className="nav-link small mr-4">
+            Tether Balance:{" "}
+            {props.everpayLoaded ? props.accountBalance : "loading..."}
+          </p>
+        </li>
+        <li className="nav-item">
           <a
             className="nav-link small"
             href={`https://etherscan.io/address/${props.account}`}
           >
             {props.everpayLoaded
-              ? `${props.account
+              ? `Account: ${props.account
                   .split("")
                   .splice(0, 5, "")
                   .join("")}...${props.account
                   .split("")
                   .splice(38, 4, "")
                   .join("")}`
-              : ""}
+              : "Log into metamask!"}
           </a>
         </li>
       </ul>
@@ -35,6 +45,7 @@ function mapStateToProps(state) {
   return {
     account: accountSelector(state),
     everpayLoaded: everpayLoadedSelector(state),
+    accountBalance: accountBalanceSelector(state),
   };
 }
 

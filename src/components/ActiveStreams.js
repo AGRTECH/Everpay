@@ -63,6 +63,15 @@ const ActiveStreams = (props) => {
       }
     }
 
+    let withdrawCompletedArr = [];
+    if (allWithdrawlsLoaded && allWithdrawls.data.length > 0) {
+      for (let i = 0; i < formattedWithdrawls.length; i++) {
+        if (parseInt(formattedWithdrawls[i]._depositAmountRemaining) === 0) {
+          withdrawCompletedArr.push(stream._streamId);
+        }
+      }
+    }
+
     // formattedCancels[stream._streamId - 1][]
     if (
       account === stream._receiver &&

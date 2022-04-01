@@ -85,7 +85,7 @@ contract Everpay {
     // Create rate per second
     uint _dividedAmount = _deposit.div(_endTime);
 
-    require(_deposit % _dividedAmount == 0);
+    // require(_deposit % _dividedAmount == 0);
 
     //  Set streaming to true for receiver address
     isStreaming[_receiver] = true;
@@ -115,13 +115,17 @@ contract Everpay {
 
     tether.transfer(msg.sender, _balance);
 
+
     emit Withdraw(streamId, msg.sender, depositAmountRemaining[_sender][msg.sender], streamBalanceOf[streamId][msg.sender],  now);
+
+    if(depositAmountRemaining[_sender][msg.sender] == 0){
+      cancel(msg.sender);
+    }
   }
 
   function cancel(address _receiver) public {
     // Has to be streaming to be able to cancel
     require(isStreaming[_receiver]);
-    require(depositAmountRemaining[msg.sender][_receiver] > 0);
 
     // After cancel, receiver won't be streaming anymore
     isStreaming[_receiver] = false;

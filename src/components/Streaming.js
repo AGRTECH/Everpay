@@ -22,8 +22,16 @@ const Streaming = (props) => {
     let interval;
     interval = setInterval(() => {
       setBalance((balance) => {
-        if (balance < props.streamDeposit) {
+        if (
+          balance < props.streamDeposit &&
+          balance + props.streamRatePerSecond <= props.streamDeposit
+        ) {
           return balance + props.streamRatePerSecond;
+        } else if (
+          balance < props.streamDeposit &&
+          balance + props.streamRatePerSecond > props.streamDeposit
+        ) {
+          return (balance = props.streamDeposit);
         } else {
           return balance;
         }
@@ -71,9 +79,14 @@ const Streaming = (props) => {
           >
             Withdraw Balance
           </Button>
-          <p>
-            Withdrawn: {receiverStreamBalance} / {props.streamDeposit}
-          </p>
+          <div className="flex-text">
+            <p className="mr-4">
+              Sent: {balance} / {props.streamDeposit}
+            </p>
+            <p>
+              Withdrawn: {receiverStreamBalance} / {props.streamDeposit}
+            </p>
+          </div>
         </>
       ) : (
         <>
@@ -97,9 +110,14 @@ const Streaming = (props) => {
           >
             Cancel Stream
           </Button>
-          <p>
-            Sent: {balance} / {props.streamDeposit}
-          </p>
+          <div className="flex-text">
+            <p className="mr-4">
+              Sent: {balance} / {props.streamDeposit}
+            </p>
+            <p>
+              Withdrawn: {receiverStreamBalance} / {props.streamDeposit}
+            </p>
+          </div>
         </>
       )}
     </>

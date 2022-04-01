@@ -12,13 +12,6 @@ export function web3AccountLoaded(account) {
   };
 }
 
-export function web3AccountTwoLoaded(account) {
-  return {
-    type: "WEB3_ACCOUNT_TWO_LOADED",
-    account,
-  };
-}
-
 export function tetherLoaded(contract) {
   return {
     type: "TETHER_LOADED",
@@ -131,5 +124,12 @@ export function streamingStatusChanged(status) {
   return {
     type: "STREAMING_STATUS_CHANGED",
     status,
+  };
+}
+
+export function accountBalanceChanged(balance) {
+  return {
+    type: "ACCOUNT_BALANCE_CHANGED",
+    balance,
   };
 }

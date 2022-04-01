@@ -4,8 +4,8 @@ import { createSelector } from "reselect";
 const account = (state) => get(state, "web3.account");
 export const accountSelector = createSelector(account, (a) => a);
 
-const accountTwo = (state) => get(state, "web3.accountTwo");
-export const accountTwoSelector = createSelector(accountTwo, (a) => a);
+const accountBalance = (state) => get(state, "web3.accountBalance");
+export const accountBalanceSelector = createSelector(accountBalance, (a) => a);
 
 const web3 = (state) => get(state, "web3.connection");
 export const web3Selector = createSelector(web3, (w) => w);
