@@ -126,3 +126,10 @@ export function allCancelsLoaded(cancels) {
     cancels,
   };
 }
+
+export function streamingStatusChanged(status) {
+  return {
+    type: "STREAMING_STATUS_CHANGED",
+    status,
+  };
+}

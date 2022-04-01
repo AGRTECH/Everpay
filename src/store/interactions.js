@@ -16,6 +16,7 @@ import {
   cancelCreating,
   allWithdrawlsLoaded,
   allCancelsLoaded,
+  streamingStatusChanged,
 } from "./actions";
 
 export const loadWeb3 = (dispatch) => {
@@ -189,4 +190,11 @@ export const cancelFunc = (dispatch, everpay, account, receiver) => {
       console.error(error);
       window.alert(`There was an error!`);
     });
+};
+
+export const isStreamingFunc = async (dispatch, everpay, account, receiver) => {
+  let receiverStreamingStatus = await everpay.methods
+    .isStreaming(receiver)
+    .call();
+  dispatch(streamingStatusChanged(receiverStreamingStatus));
 };

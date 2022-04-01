@@ -14,6 +14,7 @@ contract Everpay {
    address public owner;
    Tether public tether;
    uint256 public streamId;
+   uint256 public cancelId;
    mapping(uint => mapping(address => uint))public streamBalanceOf;
    mapping(address => mapping(address => uint)) public depositAmountRemaining;
    mapping(uint256 => _Stream) public streams;
@@ -49,6 +50,7 @@ contract Everpay {
 
   event Cancel(
     uint256 _streamId,
+    uint256 _cancelId,
     bool _isStreaming,
     address _sender, 
     address _receiver, 
@@ -82,6 +84,8 @@ contract Everpay {
 
     // Create rate per second
     uint _dividedAmount = _deposit.div(_endTime);
+
+    require(_deposit % _dividedAmount == 0);
 
     //  Set streaming to true for receiver address
     isStreaming[_receiver] = true;
@@ -129,6 +133,9 @@ contract Everpay {
     streamBalanceOf[streamId][_receiver] = 0;
     depositAmountRemaining[msg.sender][_receiver] = 0;
 
-    emit Cancel(streamId, isStreaming[_receiver], msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], now);
+    // Increment cancel ID
+    cancelId = cancelId.add(1);
+
+    emit Cancel(streamId, cancelId, isStreaming[_receiver], msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], now);
   }
 }

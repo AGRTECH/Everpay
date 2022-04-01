@@ -34,6 +34,8 @@ function everpay(state = {}, action) {
       return { ...state, cancelCreated: false };
     case "APPROVED":
       return { ...state, fundsApproved: true };
+    case "STREAMING_STATUS_CHANGED":
+      return { ...state, streamStatus: true };
     case "ALL_STREAMS_LOADED":
       return {
         ...state,

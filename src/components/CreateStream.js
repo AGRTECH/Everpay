@@ -55,13 +55,13 @@ const CreateStream = (props) => {
       {everpayLoaded && tetherLoaded ? (
         <div className="container-1 shadow">
           <h1>Create A Stream Here</h1>
-          <button
+          {/* <button
             onClick={() => {
               showBalances(dispatch, account, tether, everpay);
-            }}
-          >
+            }} */}
+          {/* >
             Show Balances
-          </button>
+          </button> */}
           <Button variant="primary" onClick={handleShow}>
             Stream!
           </Button>
@@ -210,6 +210,270 @@ const CreateStream = (props) => {
                       }}
                     >
                       10s
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown className="form-group">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Time interval (in minutes)
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu className="dropdown-menu-scroll">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(60));
+                      }}
+                    >
+                      1m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(120));
+                      }}
+                    >
+                      2m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(180));
+                      }}
+                    >
+                      3m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(240));
+                      }}
+                    >
+                      4m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(300));
+                      }}
+                    >
+                      5m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(360));
+                      }}
+                    >
+                      6m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(420));
+                      }}
+                    >
+                      7m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(480));
+                      }}
+                    >
+                      8m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(540));
+                      }}
+                    >
+                      9m
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(600));
+                      }}
+                    >
+                      10m
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown className="form-group">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Time interval (in hours)
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu className="dropdown-menu-scroll">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(3600));
+                      }}
+                    >
+                      1hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(7200));
+                      }}
+                    >
+                      2hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(10800));
+                      }}
+                    >
+                      3hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(14400));
+                      }}
+                    >
+                      4hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(18000));
+                      }}
+                    >
+                      5hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(21600));
+                      }}
+                    >
+                      6hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(25200));
+                      }}
+                    >
+                      7hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(28800));
+                      }}
+                    >
+                      8hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(32400));
+                      }}
+                    >
+                      9hr
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(36000));
+                      }}
+                    >
+                      10hr
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown className="form-group">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Time interval (in days)
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu className="dropdown-menu-scroll">
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(86400));
+                      }}
+                    >
+                      1 day
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(172800));
+                      }}
+                    >
+                      2 days
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(259200));
+                      }}
+                    >
+                      3 days
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(345600));
+                      }}
+                    >
+                      4 days
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(432000));
+                      }}
+                    >
+                      5 days
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(518400));
+                      }}
+                    >
+                      6 days
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(604800));
+                      }}
+                    >
+                      7 days
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(691200));
+                      }}
+                    >
+                      8 days
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(777600));
+                      }}
+                    >
+                      9 days
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(endTimeChanged(864000));
+                      }}
+                    >
+                      10 days
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

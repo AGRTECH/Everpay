@@ -2,12 +2,20 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import StreamChart from "./StreamChart";
-import { withdrawFunc, cancelFunc } from "../store/interactions";
-import { everpaySelector, accountSelector } from "../store/selectors";
+import {
+  withdrawFunc,
+  cancelFunc,
+  isStreamingFunc,
+} from "../store/interactions";
+import {
+  everpaySelector,
+  accountSelector,
+  allStreamsSelector,
+  allStreamsLoadedSelector,
+} from "../store/selectors";
 import { Button } from "react-bootstrap";
 
 const Streaming = (props) => {
-  // parseInt(props.streamReceiverBalance)
   let receiverStreamBalance = parseInt(props.streamReceiverBalance);
   const [balance, setBalance] = useState(receiverStreamBalance);
   useEffect(() => {
@@ -25,6 +33,22 @@ const Streaming = (props) => {
   }, []);
 
   console.log(balance);
+  // let localStorageBalance;
+  // if (
+  //   localStorage.getItem(`balance${props.streamId}`) <
+  //     parseInt(props.streamDeposit) ||
+  //   !localStorage.getItem(`balance${props.streamId}`)
+  // ) {
+  //   localStorage.setItem(`balance${props.streamId}`, balance);
+  // }
+  // localStorageBalance = localStorage.getItem(`balance${props.streamId}`);
+  // let formattedBalance = (localStorageBalance / props.streamDeposit) * 100;
+  // if (props.allStreamsLoaded) {
+  //   console.log(
+  //     props.allStreams.data.splice(props.streamId - 1, 1),
+  //     props.allStreams.data[props.streamId - 1]
+  //   );
+  // }
   let formattedBalance = (balance / props.streamDeposit) * 100;
   return (
     <>
@@ -42,6 +66,7 @@ const Streaming = (props) => {
                 props.streamSender,
                 balance
               );
+              // localStorage.removeItem(`balance${props.streamId}`);
             }}
           >
             Withdraw Balance
@@ -51,19 +76,31 @@ const Streaming = (props) => {
           </p>
         </>
       ) : (
-        <Button
-          variant="danger"
-          onClick={(e) => {
-            cancelFunc(
-              props.dispatch,
-              props.everpay,
-              props.account,
-              props.streamReceiver
-            );
-          }}
-        >
-          Cancel Stream
-        </Button>
+        <>
+          <Button
+            variant="danger"
+            onClick={(e) => {
+              cancelFunc(
+                props.dispatch,
+                props.everpay,
+                props.account,
+                props.streamReceiver
+              );
+              isStreamingFunc(
+                props.dispatch,
+                props.everpay,
+                props.account,
+                props.streamReceiver
+              );
+              // localStorage.removeItem(`balance${props.streamId}`);
+            }}
+          >
+            Cancel Stream
+          </Button>
+          <p>
+            Sent: {balance} / {props.streamDeposit}
+          </p>
+        </>
       )}
     </>
   );
@@ -73,6 +110,8 @@ function mapStateToProps(state) {
   return {
     everpay: everpaySelector(state),
     account: accountSelector(state),
+    allStreams: allStreamsSelector(state),
+    allStreamsLoaded: allStreamsLoadedSelector(state),
   };
 }
 
