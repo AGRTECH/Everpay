@@ -29,10 +29,10 @@ const Dropdowns = (props) => {
             <Dropdown className="form-group">
               <Dropdown.Toggle
                 variant="success"
-                className="mr-2"
+                className="mr-2 dropdown-buttons time-amount"
                 id="dropdown-basic"
               >
-                Time interval (in seconds)
+                Add Seconds
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="dropdown-menu-scroll">
@@ -118,103 +118,108 @@ const Dropdowns = (props) => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Dropdown className="form-group">
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Time interval (in minutes)
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu className="dropdown-menu-scroll">
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(60));
-                  }}
-                >
-                  1m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(120));
-                  }}
-                >
-                  2m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(180));
-                  }}
-                >
-                  3m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(240));
-                  }}
-                >
-                  4m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(300));
-                  }}
-                >
-                  5m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(360));
-                  }}
-                >
-                  6m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(420));
-                  }}
-                >
-                  7m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(480));
-                  }}
-                >
-                  8m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(540));
-                  }}
-                >
-                  9m
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(600));
-                  }}
-                >
-                  10m
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
           </div>
+          <Dropdown className="form-group">
+            <Dropdown.Toggle
+              variant="success"
+              className="dropdown-buttons"
+              id="dropdown-basic"
+            >
+              Add Minutes
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className="dropdown-menu-scroll">
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(60));
+                }}
+              >
+                1m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(120));
+                }}
+              >
+                2m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(180));
+                }}
+              >
+                3m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(240));
+                }}
+              >
+                4m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(300));
+                }}
+              >
+                5m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(360));
+                }}
+              >
+                6m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(420));
+                }}
+              >
+                7m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(480));
+                }}
+              >
+                8m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(540));
+                }}
+              >
+                9m
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(600));
+                }}
+              >
+                10m
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
           <div className="flex-dropdowns">
             <Dropdown className="form-group">
               <Dropdown.Toggle
                 variant="success"
-                className="mr-2"
+                className="mr-2 dropdown-buttons"
                 id="dropdown-basic"
               >
-                Time interval (in hours)
+                Add Hours
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="dropdown-menu-scroll">
@@ -301,8 +306,12 @@ const Dropdowns = (props) => {
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="form-group">
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Time interval (in days)
+              <Dropdown.Toggle
+                variant="success"
+                className="dropdown-buttons"
+                id="dropdown-basic"
+              >
+                Add Days
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="dropdown-menu-scroll">

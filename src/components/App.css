@@ -4,6 +4,13 @@
   font-weight: bold;
 }
 
+body {
+  background-image: url("../img/leavestransparent.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -18,9 +25,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(1, 0, 0, 0.05);
-  padding: 50px 50px 15px 50px;
+  background-color: #54915e;
+  /* padding: 200px 50px 200px 50px; */
+  height: 75vh;
   margin: 50px 100px 0 100px;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  opacity: 98%;
 }
 
 .dropdown-menu-scroll {
@@ -40,6 +50,7 @@
 
 .newNav {
   background-color: #54915e;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
 }
 
 .everpayLogo {
@@ -53,4 +64,41 @@
   background-color: #416346;
   border-radius: 20%;
   border: 2px rgba(0, 0, 0, 0.3) solid;
+}
+
+.nav-account:hover {
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+}
+
+.stream-button {
+  background-color: #92a374;
+  border: none;
+}
+
+.dropdown-buttons {
+  background-color: #416346;
+  border: none;
+}
+
+.dropdown-buttons {
+  background-color: #364d3a;
+}
+
+.bar {
+  padding: 2px 50px;
+  background-color: green;
+  opacity: 25%;
+  margin-bottom: 25px;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+.stream-amount {
+  width: 80%;
+}
+
+.time-amount {
 }

@@ -17,7 +17,7 @@ const StreamChart = (props) => {
         },
       },
     },
-    colors: ["#416346"],
+    colors: ["#000000"],
     labels: ["Tether"],
   });
 

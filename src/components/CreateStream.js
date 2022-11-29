@@ -66,7 +66,8 @@ const CreateStream = (props) => {
     <>
       {everpayLoaded && tetherLoaded ? (
         <div className="container-1 shadow">
-          <h1>Create A Stream</h1>
+          <p>Tap the button below to create a stream</p>
+          <div className="bar"></div>
           {/* <button
             onClick={() => {
               showBalances(dispatch, account, tether, everpay);
@@ -74,7 +75,7 @@ const CreateStream = (props) => {
           >
             Show Balances
           </button> */}
-          <Button variant="primary" onClick={handleShow}>
+          <Button className="stream-button" onClick={handleShow}>
             Stream!
           </Button>
           <Modal
@@ -83,8 +84,8 @@ const CreateStream = (props) => {
             backdrop="static"
             keyboard={false}
           >
-            <Modal.Header closeButton>
-              <Modal.Title>Create Stream</Modal.Title>
+            <Modal.Header className="modal-title" closeButton>
+              <Modal.Title className="modal-title">Create Stream</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <form
@@ -94,18 +95,20 @@ const CreateStream = (props) => {
                   approveFunds(everpay, tether, deposit, account, dispatch);
                 }}
               >
+                <p>What is the total amount you will stream?</p>
                 <input
                   type="text"
-                  placeholder="Stream Amount"
+                  placeholder="1000 Tether"
                   onChange={(e) => {
                     dispatch(streamAmountChanged(parseInt(e.target.value)));
                   }}
-                  className="bg-dark text-white form-group mr-2"
+                  className="bg-dark text-white form-group stream-amount mr-2"
                   required
                 />
+                <p>What address will be receiving this stream?</p>
                 <input
                   type="text"
-                  placeholder="Recipient Address"
+                  placeholder="0x0000..."
                   onChange={(e) => {
                     if (
                       e.target.value.length < 42 ||
@@ -117,11 +120,15 @@ const CreateStream = (props) => {
                       dispatch(recipientAddressChanged(e.target.value));
                     }
                   }}
-                  className="bg-dark text-white form-group"
+                  className="bg-dark text-white form-group stream-amount"
                   required
                 />
                 <Dropdown className="form-group">
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle
+                    variant="success"
+                    className="dropdown-buttons"
+                    id="dropdown-basic"
+                  >
                     Token
                   </Dropdown.Toggle>
 
@@ -142,7 +149,10 @@ const CreateStream = (props) => {
                     ? `D: ${textDay} H: ${textHour} M: ${textMinute} S: ${textSecond}`
                     : "D: 0  H: 0  M: 0 S: 0"
                 }`}</p>
-                <button className="btn btn-primary form-group" type="submit">
+                <button
+                  className="btn btn-primary stream-button form-group"
+                  type="submit"
+                >
                   Approve Funds
                 </button>
               </form>
@@ -152,6 +162,7 @@ const CreateStream = (props) => {
                 Close
               </Button>
               <Button
+                className="stream-button"
                 variant="primary"
                 onClick={() => {
                   createStreamFunc(
