@@ -52,11 +52,21 @@ const CreateStream = (props) => {
     allStreamsLoaded,
   } = props;
 
+  const second = 1;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  const textDay = Math.floor(endTime / day);
+  const textHour = Math.floor((endTime % day) / hour);
+  const textMinute = Math.floor((endTime % hour) / minute);
+  const textSecond = Math.floor((endTime % minute) / second);
+
   return (
     <>
       {everpayLoaded && tetherLoaded ? (
         <div className="container-1 shadow">
-          <h1>Create A Stream Here</h1>
+          <h1>Create A Stream</h1>
           {/* <button
             onClick={() => {
               showBalances(dispatch, account, tether, everpay);
@@ -84,29 +94,13 @@ const CreateStream = (props) => {
                   approveFunds(everpay, tether, deposit, account, dispatch);
                 }}
               >
-                <Dropdown className="form-group">
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Token
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item
-                      href="#/action-1"
-                      onClick={(e) => {
-                        dispatch(tokenChanged(tether._address));
-                      }}
-                    >
-                      Tether
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
                 <input
                   type="text"
                   placeholder="Stream Amount"
                   onChange={(e) => {
                     dispatch(streamAmountChanged(parseInt(e.target.value)));
                   }}
-                  className="bg-dark text-white form-group"
+                  className="bg-dark text-white form-group mr-2"
                   required
                 />
                 <input
@@ -126,7 +120,28 @@ const CreateStream = (props) => {
                   className="bg-dark text-white form-group"
                   required
                 />
+                <Dropdown className="form-group">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Token
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item
+                      href="#/action-1"
+                      onClick={(e) => {
+                        dispatch(tokenChanged(tether._address));
+                      }}
+                    >
+                      Tether
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
                 <Dropdowns />
+                <p className="shadow pl-2">{`Final Time Interval: ${
+                  endTime
+                    ? `D: ${textDay} H: ${textHour} M: ${textMinute} S: ${textSecond}`
+                    : "D: 0  H: 0  M: 0 S: 0"
+                }`}</p>
                 <button className="btn btn-primary form-group" type="submit">
                   Approve Funds
                 </button>

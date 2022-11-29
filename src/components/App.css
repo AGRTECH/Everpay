@@ -32,3 +32,25 @@
   display: flex;
   flex-direction: row;
 }
+
+.flex-dropdowns {
+  display: flex;
+  flex-direction: row;
+}
+
+.newNav {
+  background-color: #54915e;
+}
+
+.everpayLogo {
+  width: 150px;
+  height: 75px;
+}
+
+.nav-account {
+  color: black;
+  padding: 10px;
+  background-color: #416346;
+  border-radius: 20%;
+  border: 2px rgba(0, 0, 0, 0.3) solid;
+}

@@ -106,7 +106,12 @@ function everpay(state = {}, action) {
     case "RECIPIENT_ADDRESS_CHANGED":
       return { ...state, streamRecipientAddress: action.address };
     case "END_TIME_CHANGED":
-      return { ...state, streamEndTime: action.time };
+      if (state.streamEndTime) {
+        data = state.streamEndTime + action.time;
+      } else {
+        data = action.time;
+      }
+      return { ...state, streamEndTime: data };
     default:
       return state;
   }
