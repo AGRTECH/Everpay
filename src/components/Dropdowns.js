@@ -122,7 +122,7 @@ const Dropdowns = (props) => {
           <Dropdown className="form-group">
             <Dropdown.Toggle
               variant="success"
-              className="dropdown-buttons"
+              className="dropdown-buttons time-amount"
               id="dropdown-basic"
             >
               Add Minutes
@@ -216,7 +216,7 @@ const Dropdowns = (props) => {
             <Dropdown className="form-group">
               <Dropdown.Toggle
                 variant="success"
-                className="mr-2 dropdown-buttons"
+                className="mr-2 dropdown-buttons time-amount"
                 id="dropdown-basic"
               >
                 Add Hours
@@ -305,99 +305,99 @@ const Dropdowns = (props) => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Dropdown className="form-group">
-              <Dropdown.Toggle
-                variant="success"
-                className="dropdown-buttons"
-                id="dropdown-basic"
-              >
-                Add Days
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu className="dropdown-menu-scroll">
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(86400));
-                  }}
-                >
-                  1 day
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(172800));
-                  }}
-                >
-                  2 days
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(259200));
-                  }}
-                >
-                  3 days
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(345600));
-                  }}
-                >
-                  4 days
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(432000));
-                  }}
-                >
-                  5 days
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(518400));
-                  }}
-                >
-                  6 days
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(604800));
-                  }}
-                >
-                  7 days
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(691200));
-                  }}
-                >
-                  8 days
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(777600));
-                  }}
-                >
-                  9 days
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#/action-1"
-                  onClick={(e) => {
-                    dispatch(endTimeChanged(864000));
-                  }}
-                >
-                  10 days
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
           </div>
+          <Dropdown className="form-group">
+            <Dropdown.Toggle
+              variant="success"
+              className="dropdown-buttons time-amount"
+              id="dropdown-basic"
+            >
+              Add Days
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className="dropdown-menu-scroll">
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(86400));
+                }}
+              >
+                1 day
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(172800));
+                }}
+              >
+                2 days
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(259200));
+                }}
+              >
+                3 days
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(345600));
+                }}
+              >
+                4 days
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(432000));
+                }}
+              >
+                5 days
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(518400));
+                }}
+              >
+                6 days
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(604800));
+                }}
+              >
+                7 days
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(691200));
+                }}
+              >
+                8 days
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(777600));
+                }}
+              >
+                9 days
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={(e) => {
+                  dispatch(endTimeChanged(864000));
+                }}
+              >
+                10 days
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </>
       ) : (
         <div>Contracts Not loaded</div>

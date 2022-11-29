@@ -124,9 +124,10 @@ const CreateStream = (props) => {
                   required
                 />
                 <Dropdown className="form-group">
+                  <p>What token will be streamed?</p>
                   <Dropdown.Toggle
                     variant="success"
-                    className="dropdown-buttons"
+                    className="dropdown-buttons time-amount"
                     id="dropdown-basic"
                   >
                     Token
@@ -143,6 +144,7 @@ const CreateStream = (props) => {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                <p>For how long should the tokens be streamed?</p>
                 <Dropdowns />
                 <p className="shadow pl-2">{`Final Time Interval: ${
                   endTime

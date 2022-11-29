@@ -17,6 +17,7 @@ import ActiveStreams from "./ActiveStreams";
 import ParticlesBg from "particles-bg";
 
 const App = (props) => {
+  // "node": "8.11.1"
   const [mounted, setMounted] = useState(false);
 
   const loadBlockchainData = async (dispatch) => {
