@@ -2,6 +2,7 @@ pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import './Tether.sol';
+import './ERC20Tether.sol';
 // -- Inspired By Sablier --
 // To-Do List
 // [X] Stream function (sent by sender received by receiver)
@@ -19,6 +20,7 @@ contract Everpay {
    mapping(address => mapping(address => uint)) public depositAmountRemaining;
    mapping(uint256 => _Stream) public streams;
    mapping(address => bool) public isStreaming;
+
    constructor(Tether _tether) public {
     tether = _tether;
     owner = msg.sender;
