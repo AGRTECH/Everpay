@@ -11,16 +11,16 @@ module.exports = {
       port: 7545,
       network_id: "*",
     },
-    kovan: {
+    goerli: {
       provider: function () {
         return new HDWalletProvider(
           privateKeys.split(","), // Array of account private keys from .env
-          `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`
+          `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`
         );
       },
       gas: 5000000,
       gasPrice: 25000000000,
-      network_id: 42,
+      network_id: 5,
     },
   },
   contracts_directory: "./src/contracts/",
