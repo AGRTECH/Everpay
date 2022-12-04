@@ -65,7 +65,7 @@ const CreateStream = (props) => {
   return (
     <>
       {everpayLoaded && tetherLoaded ? (
-        <div className="container-1 shadow">
+        <div className="container shadow">
           <p>Tap the button below to create a stream</p>
           <div className="bar"></div>
           {/* <button
