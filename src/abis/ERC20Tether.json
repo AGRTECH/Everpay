@@ -1,0 +1,104 @@
+{
+  "contractName": "ERC20Tether",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/ross4/Desktop/Coding/Blockchain-Code/EverPay/src/contracts/ERC20Tether.sol\":\"ERC20Tether\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/ross4/Desktop/Coding/Blockchain-Code/EverPay/src/contracts/ERC20Tether.sol\":{\"keccak256\":\"0x6ae48f3b6e3ad7b696e4c759c4aad9c6d3483964d4a355a666cb0e51595c8e11\",\"urls\":[\"bzz-raw://f44c5231a2044c2efd6f5b0a239ca2a42fac1f027bde0663097aba6c1b1a4335\",\"dweb:/ipfs/QmU7yYNh7rY3MiNXFwqGtbjoMchPABDKduTqK2dX31oM9U\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a7231582062edfef8f7754b27a8251215ffbb11d97e534f65d88f2cc25e4a583bbd75adcc64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a7231582062edfef8f7754b27a8251215ffbb11d97e534f65d88f2cc25e4a583bbd75adcc64736f6c63430005100032",
+  "sourceMap": "27:28:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:28:0;;;;;;;",
+  "deployedSourceMap": "27:28:0:-;;;;;",
+  "source": "pragma solidity ^0.5.0;\r\n\r\ncontract ERC20Tether {\r\n \r\n}",
+  "sourcePath": "C:\\Users\\ross4\\Desktop\\Coding\\Blockchain-Code\\EverPay\\src\\contracts\\ERC20Tether.sol",
+  "ast": {
+    "absolutePath": "/C/Users/ross4/Desktop/Coding/Blockchain-Code/EverPay/src/contracts/ERC20Tether.sol",
+    "exportedSymbols": {
+      "ERC20Tether": [
+        2
+      ]
+    },
+    "id": 3,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "ERC20Tether",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "27:28:0"
+      }
+    ],
+    "src": "0:55:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/Users/ross4/Desktop/Coding/Blockchain-Code/EverPay/src/contracts/ERC20Tether.sol",
+    "exportedSymbols": {
+      "ERC20Tether": [
+        2
+      ]
+    },
+    "id": 3,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "ERC20Tether",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "27:28:0"
+      }
+    ],
+    "src": "0:55:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2022-12-04T21:26:41.513Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
