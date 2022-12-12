@@ -69,13 +69,17 @@ body {
 }
 
 .request-funds-button {
+  position: relative;
+  top: 0;
+  transition: top ease 0.5s;
   background-color: #92a374;
   border: rgba(0, 0, 0, 0.5) 3px solid;
   margin-top: 15px;
 }
 
 .request-funds-button:hover {
-  color: rgba(0, 0, 0, 0.5);
+  top: -10px;
+  background-color: black;
   text-decoration: none;
 }
 
@@ -85,8 +89,17 @@ body {
 }
 
 .stream-button {
+  position: relative;
+  top: 0;
+  transition: top ease 0.5s;
   background-color: #92a374;
   border: black 3px solid;
+}
+
+.stream-button:hover {
+  top: -10px;
+  background-color: black;
+  text-decoration: none;
 }
 
 .dropdown-buttons {
