@@ -113,8 +113,7 @@ body {
 
 .bar {
   padding: 2px 50px;
-  background-color: black;
-  opacity: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
   margin-bottom: 25px;
 }
 
@@ -132,7 +131,7 @@ body {
 
 .funds-text {
   margin-top: 170px;
-  opacity: 70%;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .neg-top {
