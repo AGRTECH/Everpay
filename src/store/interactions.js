@@ -150,6 +150,41 @@ export const approveFunds = (everpay, tether, deposit, account, dispatch) => {
     });
 };
 
+export const approveRequestedFunds = (
+  everpay,
+  tether,
+  deposit,
+  account,
+  dispatch
+) => {
+  const web3 = new Web3(window.ethereum);
+  tether.methods
+    .approve(account, web3.utils.toWei("101", "ether"))
+    .send({ from: account })
+    .on("transactionHash", (hash) => {
+      dispatch(approved());
+    })
+    .on("error", (error) => {
+      console.error(error);
+      window.alert(`There was an error!`);
+    });
+};
+
+export const requestFunds = (everpay, tether, deposit, account, dispatch) => {
+  const web3 = new Web3(window.ethereum);
+  everpay.methods
+    .requestFunds()
+    .send({ from: account })
+    .on("transactionHash", (hash) => {
+      // dispatch(approved());
+      console.log("worked");
+    })
+    .on("error", (error) => {
+      console.error(error);
+      window.alert(`There was an error!`);
+    });
+};
+
 export const createStreamFunc = (
   dispatch,
   everpay,

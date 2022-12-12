@@ -20,6 +20,8 @@ import {
   createStreamFunc,
   approveFunds,
   showBalances,
+  requestFunds,
+  approveRequestedFunds,
 } from "../store/interactions";
 import { Button, Modal, Dropdown } from "react-bootstrap";
 import {
@@ -66,7 +68,7 @@ const CreateStream = (props) => {
     <>
       {everpayLoaded && tetherLoaded ? (
         <div className="container-1 shadow">
-          <p>Tap the button below to create a stream</p>
+          <p className="stream-text">Tap the button below to create a stream</p>
           <div className="bar"></div>
           {/* <button
             onClick={() => {
@@ -77,6 +79,15 @@ const CreateStream = (props) => {
           </button> */}
           <Button className="stream-button" onClick={handleShow}>
             Stream!
+          </Button>
+          <p className="funds-text">Need funds to try out app? Click below</p>
+          <Button
+            className="request-funds-button neg-top"
+            onClick={() => {
+              requestFunds(everpay, tether, deposit, account, dispatch);
+            }}
+          >
+            Request Test Tether
           </Button>
           <Modal
             show={show}

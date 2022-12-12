@@ -2,7 +2,6 @@ pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import './Tether.sol';
-import './ERC20Tether.sol';
 // -- Inspired By Sablier --
 // To-Do List
 // [X] Stream function (sent by sender received by receiver)
@@ -67,6 +66,10 @@ contract Everpay {
     uint256 _streamBalanceOf,
     uint256 _timestamp
   );
+
+  function requestFunds() public {
+    tether.transfer(msg.sender, 100000000000000000000);
+  }
 
   function stream(address _receiver, uint  _deposit, address _token, uint _endTime) public {
     // Make sure that user inputed _startTime and _endTime are in seconds

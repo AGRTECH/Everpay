@@ -4,9 +4,14 @@ import {
   accountSelector,
   everpayLoadedSelector,
   accountBalanceSelector,
+  tetherSelector,
+  everpaySelector,
+  depositSelector,
 } from "../store/selectors";
+import { requestFunds } from "../store/interactions";
 import everpayLogo from "../img/everpaylogonew.png";
 import React from "react";
+import { Button } from "react-bootstrap";
 
 const Navbar = (props) => {
   return (
@@ -15,6 +20,7 @@ const Navbar = (props) => {
         <img className="everpayLogo" src={everpayLogo} alt="" />
       </a>
       <ul className="navbar-nav ml-auto">
+        <li className="nav-item"></li>
         <li className="nav-item">
           <p className="navAccount mr-4">
             Tether Balance:{" "}
@@ -47,6 +53,9 @@ function mapStateToProps(state) {
     account: accountSelector(state),
     everpayLoaded: everpayLoadedSelector(state),
     accountBalance: accountBalanceSelector(state),
+    deposit: depositSelector(state),
+    everpay: everpaySelector(state),
+    tether: tetherSelector(state),
   };
 }
 

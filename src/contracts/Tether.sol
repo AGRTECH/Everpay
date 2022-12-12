@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 contract Tether {
   string public name = 'Mock Tether Token';
   string public symbol = 'mUSDT';
-  uint256 public totalSupply = 1000000000000000000000000;
+  uint256 public totalSupply = 10000000000000000000000000000000000000;
   uint8 public decimals = 18;
 
   event Transfer(
@@ -23,7 +23,6 @@ contract Tether {
 
   constructor() public {
     balanceOf[msg.sender] = totalSupply;
-
   }
 
   function transfer(address _to,uint256 _value) public returns (bool success) {

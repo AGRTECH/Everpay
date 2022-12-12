@@ -68,14 +68,25 @@ body {
   border: 2px rgba(0, 0, 0, 0.3) solid;
 }
 
+.request-funds-button {
+  background-color: #92a374;
+  border: rgba(0, 0, 0, 0.5) 3px solid;
+  margin-top: 15px;
+}
+
+.request-funds-button:hover {
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}
+
 .nav-account:hover {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.5);
   text-decoration: none;
 }
 
 .stream-button {
   background-color: #92a374;
-  border: none;
+  border: black 3px solid;
 }
 
 .dropdown-buttons {
@@ -89,8 +100,8 @@ body {
 
 .bar {
   padding: 2px 50px;
-  background-color: green;
-  opacity: 25%;
+  background-color: black;
+  opacity: 50%;
   margin-bottom: 25px;
 }
 
@@ -104,4 +115,17 @@ body {
 
 .time-amount {
   width: 22vw;
+}
+
+.funds-text {
+  margin-top: 170px;
+  opacity: 70%;
+}
+
+.neg-top {
+  margin-top: -10px;
+}
+
+.stream-text {
+  margin-top: 170px;
 }
