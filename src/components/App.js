@@ -29,7 +29,7 @@ const App = (props) => {
     const tether = await loadTether(web3, networkId, dispatch);
     if (!everpay && !tether) {
       window.alert(
-        "Token smart contract not detcted on the current network. Please select another network with Metamask"
+        "Token smart contract not detcted on the current network. Please select Goerli with Metamask"
       );
     } else {
       await loadAllData(everpay, dispatch);

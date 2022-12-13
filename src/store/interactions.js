@@ -43,7 +43,7 @@ export const loadTether = async (web3, networkId, dispatch) => {
     return tether;
   } catch (error) {
     console.log(
-      "Contract not deployed to the current network, Please select another network with Metamask"
+      "Contract not deployed to the current network, Please select Goerli with Metamask"
     );
     return null;
   }
@@ -59,7 +59,7 @@ export const loadEverpay = async (web3, networkId, dispatch) => {
     return everpay;
   } catch (error) {
     console.log(
-      "Contract not deployed to the current network, Please select another network with Metamask"
+      "Contract not deployed to the current network, Please select Goerli with Metamask"
     );
     return null;
   }
