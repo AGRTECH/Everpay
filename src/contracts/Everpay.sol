@@ -1,6 +1,7 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
 
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/Safemath.sol";
 import './Tether.sol';
 // -- Inspired By Sablier --
 // To-Do List
@@ -20,7 +21,7 @@ contract Everpay {
    mapping(uint256 => _Stream) public streams;
    mapping(address => bool) public isStreaming;
 
-   constructor(Tether _tether) public {
+   constructor(Tether _tether) {
     tether = _tether;
     owner = msg.sender;
   }
@@ -71,7 +72,7 @@ contract Everpay {
     tether.transfer(msg.sender, 100000000000000000000);
   }
 
-  function stream(address _receiver, uint  _deposit, address _token, uint _endTime) public {
+  function stream(address _receiver, uint _deposit, address _token, uint _endTime) public {
     // Make sure that user inputed _startTime and _endTime are in seconds
      if(!isStreaming[_receiver]){
 
@@ -101,7 +102,7 @@ contract Everpay {
     // Add stream to stream mapping
     streams[streamId] = _Stream(_deposit, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], _endTime, _receiver, msg.sender, _token);
 
-    emit Stream(streamId, isStreaming[_receiver], msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], streamBalanceOf[streamId][msg.sender], _endTime, now);
+    emit Stream(streamId, isStreaming[_receiver], msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], streamBalanceOf[streamId][msg.sender], _endTime, block.timestamp);
   }
 
   function withdraw(uint _balance, address _sender) public {
@@ -121,7 +122,7 @@ contract Everpay {
     tether.transfer(msg.sender, _balance);
 
 
-    emit Withdraw(streamId, msg.sender, depositAmountRemaining[_sender][msg.sender], streamBalanceOf[streamId][msg.sender],  now);
+    emit Withdraw(streamId, msg.sender, depositAmountRemaining[_sender][msg.sender], streamBalanceOf[streamId][msg.sender],  block.timestamp);
 
     if(depositAmountRemaining[_sender][msg.sender] == 0){
       cancel(msg.sender);
@@ -145,6 +146,6 @@ contract Everpay {
     // Increment cancel ID
     cancelId = cancelId.add(1);
 
-    emit Cancel(streamId, cancelId, isStreaming[_receiver], msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], now);
+    emit Cancel(streamId, cancelId, isStreaming[_receiver], msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], block.timestamp);
   }
 }
