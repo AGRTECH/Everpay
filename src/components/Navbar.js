@@ -50,7 +50,6 @@ const Navbar = (props) => {
         <img className="everpayLogo" src={everpayLogo} alt="" />
       </a>
       <ul className="navbar-nav ml-auto">
-        <li className="nav-item"></li>
         <li className="nav-item">
           <p className="navAccount mr-4">
             Tether Balance:{" "}

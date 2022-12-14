@@ -70,13 +70,7 @@ const CreateStream = (props) => {
         <div className="container-1 shadow">
           <p className="stream-text">Tap the button below to create a stream</p>
           <div className="bar"></div>
-          {/* <button
-            onClick={() => {
-              showBalances(dispatch, account, tether, everpay);
-            }}
-          >
-            Show Balances
-          </button> */}
+
           <Button className="stream-button" onClick={handleShow}>
             Stream!
           </Button>
@@ -197,7 +191,7 @@ const CreateStream = (props) => {
           </Modal>
         </div>
       ) : (
-        <div>Contracts Not loaded</div>
+        <div></div>
       )}
     </>
   );

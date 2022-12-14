@@ -2,6 +2,8 @@
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/utils/math/Safemath.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
 import './Tether.sol';
 // -- Inspired By Sablier --
 // To-Do List
@@ -9,7 +11,7 @@ import './Tether.sol';
 // [X] Withdraw function (have to create so the receiver doesnt have to accept a million transfer requests)
 // [X] Cancel function (just sender)
 
-contract Everpay {
+contract Everpay is ReentrancyGuard {
   using SafeMath for uint;
   
    address public owner;
@@ -68,10 +70,7 @@ contract Everpay {
     uint256 _timestamp
   );
 
-  function requestFunds() public {
-    tether.transfer(msg.sender, 100000000000000000000);
-  }
-
+  
   function stream(address _receiver, uint _deposit, address _token, uint _endTime) public {
     // Make sure that user inputed _startTime and _endTime are in seconds
      if(!isStreaming[_receiver]){
@@ -105,7 +104,7 @@ contract Everpay {
     emit Stream(streamId, isStreaming[_receiver], msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], streamBalanceOf[streamId][msg.sender], _endTime, block.timestamp);
   }
 
-  function withdraw(uint _balance, address _sender) public {
+  function withdraw(uint _balance, address _sender) nonReentrant public {
     require(_balance > 0);
     require(isStreaming[msg.sender] == true);
     // Transfer available balance to receiver (criteria for whats available to withdraw is made in JS)
@@ -129,7 +128,7 @@ contract Everpay {
     }
   }
 
-  function cancel(address _receiver) public {
+  function cancel(address _receiver) nonReentrant public {
     // Has to be streaming to be able to cancel
     require(isStreaming[_receiver]);
 
@@ -147,5 +146,10 @@ contract Everpay {
     cancelId = cancelId.add(1);
 
     emit Cancel(streamId, cancelId, isStreaming[_receiver], msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], block.timestamp);
+  }
+
+  // User get 100 test tether tokens to test this project on Goerli
+  function requestFunds() public {
+    tether.transfer(msg.sender, 100000000000000000000);
   }
 }

@@ -75,6 +75,7 @@ const Streaming = (props) => {
       {props.currentAccount === props.streamReceiver ? (
         <>
           <Button
+            className="stream-button"
             variant="primary"
             onClick={(e) => {
               withdrawFunc(
@@ -103,6 +104,7 @@ const Streaming = (props) => {
       ) : (
         <>
           <Button
+            className="stream-button"
             variant="danger"
             onClick={(e) => {
               cancelFunc(

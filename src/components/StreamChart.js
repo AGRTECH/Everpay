@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { connect } from "react-redux";
 import { everpayLoadedSelector } from "../store/selectors";
+import carbonfib from "../img/carbonfib.jpg";
 
 const StreamChart = (props) => {
   const [options, setOptions] = useState({
     chart: {
-      height: 350,
+      height: "auto",
       type: "radialBar",
     },
     plotOptions: {
@@ -19,6 +20,12 @@ const StreamChart = (props) => {
     },
     colors: ["#000000"],
     labels: ["Tether"],
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {},
+      },
+    ],
   });
 
   return (
