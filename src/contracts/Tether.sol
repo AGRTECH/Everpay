@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.5.0;
 
 contract Tether {
   string public name = 'Mock Tether Token';
@@ -22,7 +22,7 @@ contract Tether {
   mapping(address => uint256) public balanceOf;
   mapping(address => mapping(address => uint)) public allowance;
 
-  constructor() {
+  constructor() public {
     balanceOf[msg.sender] = totalSupply;
   }
 

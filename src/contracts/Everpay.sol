@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.5.0;
 
-import "@openzeppelin/contracts/utils/math/Safemath.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+// import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import './Tether.sol';
 // -- Inspired By Sablier --
@@ -11,7 +11,7 @@ import './Tether.sol';
 // [X] Withdraw function (have to create so the receiver doesnt have to accept a million transfer requests)
 // [X] Cancel function (just sender)
 
-contract Everpay is ReentrancyGuard {
+contract Everpay {
   using SafeMath for uint;
   
    address public owner;
@@ -23,7 +23,7 @@ contract Everpay is ReentrancyGuard {
    mapping(uint256 => _Stream) public streams;
    mapping(address => bool) public isStreaming;
 
-   constructor(Tether _tether) {
+   constructor(Tether _tether) public {
     tether = _tether;
     owner = msg.sender;
   }
@@ -104,7 +104,7 @@ contract Everpay is ReentrancyGuard {
     emit Stream(streamId, isStreaming[_receiver], msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], streamBalanceOf[streamId][msg.sender], _endTime, block.timestamp);
   }
 
-  function withdraw(uint _balance, address _sender) nonReentrant public {
+  function withdraw(uint _balance, address _sender) public {
     require(_balance > 0);
     require(isStreaming[msg.sender] == true);
     // Transfer available balance to receiver (criteria for whats available to withdraw is made in JS)
@@ -128,7 +128,7 @@ contract Everpay is ReentrancyGuard {
     }
   }
 
-  function cancel(address _receiver) nonReentrant public {
+  function cancel(address _receiver) public {
     // Has to be streaming to be able to cancel
     require(isStreaming[_receiver]);
 
