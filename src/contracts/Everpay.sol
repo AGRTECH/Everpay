@@ -70,7 +70,17 @@ contract Everpay is ReentrancyGuard {
     uint256 _timestamp
   );
 
-  
+   /** 
+  * @notice Creates a stream to a receiver with a specified token, amount and time interval
+  * @dev Throws if the address is trying to send more token than they own
+  * Throws if amount sent is 0 or less
+  * Throws if the amount of tokens still able to be withdrawn is less than the currenct amount able to withdraw 
+  * @param _receiver the address receiving the funds
+  * @param _deposit the amount being streamed
+  * @param _token address of streamed token
+  * @param _endTime how long the stream will take to end in seconds
+  */
+
   function stream(address _receiver, uint _deposit, address _token, uint _endTime) public {
     // Make sure that user inputed _startTime and _endTime are in seconds
      if(!isStreaming[_receiver]){
@@ -104,6 +114,15 @@ contract Everpay is ReentrancyGuard {
     emit Stream(streamId, isStreaming[_receiver], msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], streamBalanceOf[streamId][msg.sender], _endTime, block.timestamp);
   }
 
+  /** 
+  * @notice Withdraws currenct balance streamed based on time passed
+  * @dev Throws if the currenct balance is less than 0
+  * Throws if address isn't streaming
+  * Throws if the amount of tokens still able to be withdrawn is less than the currenct amount able to withdraw 
+  * @param _balance the amount able to withdraw
+  * @param _sender the address streaming
+  */
+
   function withdraw(uint _balance, address _sender) public nonReentrant {
     require(_balance > 0);
     require(isStreaming[msg.sender] == true);
@@ -128,6 +147,12 @@ contract Everpay is ReentrancyGuard {
     }
   }
 
+  /** 
+  * @notice Cancels the stream and returns the non-withdrawn funds back to streamer
+  * @dev Throws if the currenct address isn't streaming
+  * @param _receiver the address being streamed to
+  */
+
   function cancel(address _receiver) public nonReentrant {
     // Has to be streaming to be able to cancel
     require(isStreaming[_receiver]);
@@ -148,7 +173,10 @@ contract Everpay is ReentrancyGuard {
     emit Cancel(streamId, cancelId, isStreaming[_receiver], msg.sender, _receiver, depositAmountRemaining[msg.sender][_receiver], block.timestamp);
   }
 
-  // User get 100 test tether tokens to test this project on Goerli
+  /** 
+  * @notice Receives 100 test tether tokens to test this project on Goerli
+  */
+
   function requestFunds() public {
     tether.transfer(msg.sender, 100000000000000000000);
   }
