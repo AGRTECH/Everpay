@@ -2,7 +2,7 @@
 pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-// import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol";
 
 import './Tether.sol';
 // -- Inspired By Sablier --
@@ -11,7 +11,7 @@ import './Tether.sol';
 // [X] Withdraw function (have to create so the receiver doesnt have to accept a million transfer requests)
 // [X] Cancel function (just sender)
 
-contract Everpay {
+contract Everpay is ReentrancyGuard {
   using SafeMath for uint;
   
    address public owner;
@@ -104,7 +104,7 @@ contract Everpay {
     emit Stream(streamId, isStreaming[_receiver], msg.sender, _receiver, _deposit, _token, _dividedAmount, depositAmountRemaining[msg.sender][_receiver], streamBalanceOf[streamId][msg.sender], _endTime, block.timestamp);
   }
 
-  function withdraw(uint _balance, address _sender) public {
+  function withdraw(uint _balance, address _sender) public nonReentrant {
     require(_balance > 0);
     require(isStreaming[msg.sender] == true);
     // Transfer available balance to receiver (criteria for whats available to withdraw is made in JS)
@@ -128,7 +128,7 @@ contract Everpay {
     }
   }
 
-  function cancel(address _receiver) public {
+  function cancel(address _receiver) public nonReentrant {
     // Has to be streaming to be able to cancel
     require(isStreaming[_receiver]);
 
