@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { connect } from "react-redux";
 import { everpayLoadedSelector } from "../store/selectors";
-import carbonfib from "../img/carbonfib.jpg";
 
 const StreamChart = (props) => {
   const [options, setOptions] = useState({

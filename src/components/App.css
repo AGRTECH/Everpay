@@ -1,20 +1,8 @@
-/* "truffle-flattener": "^1.6.0", */
-/* "truffle-hdwallet-provider-privkey": "0.3.0", */
-/* web3 */
-/* @truffle/hdwallet-provider */
 .shadow {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   font-family: "Kanit", sans-serif;
   font-weight: bold;
 }
-
-/* body {
-  background-image: url("../img/leavestransparent.png");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
-  z-index: -99999;
-} */
 
 .leaves-img {
   position: absolute;
@@ -37,13 +25,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: #54915e; */
   background-color: rgba(53, 117, 68, 0.98);
-  /* padding: 200px 50px 200px 50px; */
   height: 80vh;
   margin: 50px 100px 0 100px;
   border: 1px solid rgba(0, 0, 0, 0.24);
-  /* opacity: 98%; */
   border-radius: 2%;
 }
 

@@ -72,7 +72,6 @@ const ActiveStreams = (props) => {
       }
     }
 
-    // formattedCancels[stream._streamId - 1][]
     if (
       account === stream._receiver &&
       stream._isStreaming &&

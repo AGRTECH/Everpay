@@ -27,23 +27,17 @@ const Streaming = (props) => {
   const [balance, setBalance] = useState(
     (Math.ceil(currentTime) - props.streamTimeStamp) * props.streamRatePerSecond
   );
-  // Math.ceil(currentTime) *  props.streamRatePerSecond / 10 ** 18 - props.streamTimeStamp
 
   useEffect(() => {
     let interval;
     interval = setInterval(() => {
       setBalance((balance) => {
         if (
-          // balance < props.streamDeposit &&
-          // balance + props.streamRatePerSecond <= props.streamDeposit
           (Math.ceil(currentTime) - props.streamTimeStamp) *
             props.streamRatePerSecond >
           props.streamDeposit
         ) {
           return (balance = props.streamDeposit);
-          // balance +
-          // (Math.ceil(currentTime) - props.streamTimeStamp) *
-          //   props.streamRatePerSecond
         } else if (
           balance < props.streamDeposit &&
           balance + props.streamRatePerSecond <= props.streamDeposit
@@ -66,28 +60,12 @@ const Streaming = (props) => {
     Math.ceil(currentTime) - props.streamTimeStamp,
     tokens(props.streamRatePerSecond.toString())
   );
-  // let localStorageBalance;
-  // if (
-  //   localStorage.getItem(`balance${props.streamId}`) <
-  //     parseInt(props.streamDeposit) ||
-  //   !localStorage.getItem(`balance${props.streamId}`)
-  // ) {
-  //   localStorage.setItem(`balance${props.streamId}`, balance);
-  // }
-  // localStorageBalance = localStorage.getItem(`balance${props.streamId}`);
-  // let formattedBalance = (localStorageBalance / props.streamDeposit) * 100;
-  // if (props.allStreamsLoaded) {
-  //   console.log(
-  //     props.allStreams.data.splice(props.streamId - 1, 1),
-  //     props.allStreams.data[props.streamId - 1]
-  //   );
-  // }
+
   let formattedBalance = (balance / props.streamDeposit) * 100;
   let noDecimalBalance = Math.ceil(parseInt(balance));
   let noDecimalDeposit = Math.ceil(parseInt(props.streamDeposit));
   return (
     <>
-      {/* <p>{isNaN(balance) ? "No stream active" : balance}</p> */}
       <StreamChart balance={formattedBalance} />
       {props.currentAccount === props.streamReceiver ? (
         <>
