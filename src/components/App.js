@@ -15,6 +15,7 @@ import {
 import CreateStream from "./CreateStream";
 import ActiveStreams from "./ActiveStreams";
 import ParticlesBg from "particles-bg";
+import leaves from "../img/leavestransparent.png";
 
 const App = (props) => {
   // "node": "8.11.1"
@@ -48,6 +49,7 @@ const App = (props) => {
 
   return (
     <>
+      <img className="leaves-img" src={leaves} alt="" />
       <Navbar />
       <ActiveStreams />
       <CreateStream />

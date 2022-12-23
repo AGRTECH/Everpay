@@ -21,24 +21,34 @@ const Streaming = (props) => {
   function tokens(number) {
     return web3.utils.fromWei(number, "ether");
   }
+  let now = new Date();
+  let currentTime = now.getTime() / 1000;
   let receiverStreamBalance = parseInt(props.streamReceiverBalance);
   const [balance, setBalance] = useState(
-    Math.ceil(props.streamReceiverBalance / 10 ** 18) * 10 ** 18
+    (Math.ceil(currentTime) - props.streamTimeStamp) * props.streamRatePerSecond
   );
+  // Math.ceil(currentTime) *  props.streamRatePerSecond / 10 ** 18 - props.streamTimeStamp
+
   useEffect(() => {
     let interval;
     interval = setInterval(() => {
       setBalance((balance) => {
         if (
+          // balance < props.streamDeposit &&
+          // balance + props.streamRatePerSecond <= props.streamDeposit
+          (Math.ceil(currentTime) - props.streamTimeStamp) *
+            props.streamRatePerSecond >
+          props.streamDeposit
+        ) {
+          return (balance = props.streamDeposit);
+          // balance +
+          // (Math.ceil(currentTime) - props.streamTimeStamp) *
+          //   props.streamRatePerSecond
+        } else if (
           balance < props.streamDeposit &&
           balance + props.streamRatePerSecond <= props.streamDeposit
         ) {
           return balance + props.streamRatePerSecond;
-        } else if (
-          balance < props.streamDeposit &&
-          balance + props.streamRatePerSecond > props.streamDeposit
-        ) {
-          return (balance = props.streamDeposit);
         } else {
           return balance;
         }
@@ -47,7 +57,15 @@ const Streaming = (props) => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(balance / 10 ** 18);
+  console.log(
+    balance / 10 ** 18,
+    props.streamRatePerSecond / 10 ** 18,
+    props.streamDeposit,
+    Math.ceil(props.streamReceiverBalance / 10 ** 18) * 10 ** 18,
+    props.streamTimeStamp,
+    Math.ceil(currentTime) - props.streamTimeStamp,
+    tokens(props.streamRatePerSecond.toString())
+  );
   // let localStorageBalance;
   // if (
   //   localStorage.getItem(`balance${props.streamId}`) <
@@ -67,7 +85,6 @@ const Streaming = (props) => {
   let formattedBalance = (balance / props.streamDeposit) * 100;
   let noDecimalBalance = Math.ceil(parseInt(balance));
   let noDecimalDeposit = Math.ceil(parseInt(props.streamDeposit));
-  console.log(Math.ceil(props.streamReceiverBalance / 10 ** 18));
   return (
     <>
       {/* <p>{isNaN(balance) ? "No stream active" : balance}</p> */}
@@ -85,7 +102,6 @@ const Streaming = (props) => {
                 props.streamSender,
                 balance / 10 ** 18
               );
-              // localStorage.removeItem(`balance${props.streamId}`);
             }}
           >
             Withdraw Balance
@@ -119,7 +135,6 @@ const Streaming = (props) => {
                 props.account,
                 props.streamReceiver
               );
-              // localStorage.removeItem(`balance${props.streamId}`);
             }}
           >
             Cancel Stream
