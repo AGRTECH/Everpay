@@ -25,13 +25,9 @@ const Dropdowns = (props) => {
     <>
       {everpayLoaded && tetherLoaded ? (
         <>
-          <div className="flex-dropdowns">
+          <div className="">
             <Dropdown className="form-group">
-              <Dropdown.Toggle
-                variant="success"
-                className="mr-2 dropdown-buttons time-amount"
-                id="dropdown-basic"
-              >
+              <Dropdown.Toggle variant="" className="dropdown-buttons">
                 Add Seconds
               </Dropdown.Toggle>
 
@@ -130,11 +126,7 @@ const Dropdowns = (props) => {
             </Dropdown>
           </div>
           <Dropdown className="form-group">
-            <Dropdown.Toggle
-              variant="success"
-              className="dropdown-buttons time-amount"
-              id="dropdown-basic"
-            >
+            <Dropdown.Toggle variant="" className="dropdown-buttons">
               Add Minutes
             </Dropdown.Toggle>
 
@@ -232,13 +224,9 @@ const Dropdowns = (props) => {
             </Dropdown.Menu>
           </Dropdown>
 
-          <div className="flex-dropdowns">
-            <Dropdown className="form-group">
-              <Dropdown.Toggle
-                variant="success"
-                className="mr-2 dropdown-buttons time-amount"
-                id="dropdown-basic"
-              >
+          <div className="">
+            <Dropdown className="">
+              <Dropdown.Toggle variant="" className="dropdown-buttons">
                 Add Hours
               </Dropdown.Toggle>
 
@@ -337,11 +325,7 @@ const Dropdowns = (props) => {
             </Dropdown>
           </div>
           <Dropdown className="form-group">
-            <Dropdown.Toggle
-              variant="success"
-              className="dropdown-buttons time-amount"
-              id="dropdown-basic"
-            >
+            <Dropdown.Toggle variant="" className="dropdown-buttons">
               Add Days
             </Dropdown.Toggle>
 

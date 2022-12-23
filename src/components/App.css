@@ -106,12 +106,22 @@
 }
 
 .dropdown-buttons {
-  background-color: #416346;
-  border: none;
+  width: 100%;
+  text-align: left;
+  background-color: white;
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.11);
+  margin-top: -5px;
+  margin-bottom: 5px;
+  padding: -5px;
 }
 
-.dropdown-buttons {
-  background-color: #364d3a;
+.tether-option {
+  width: 100%;
+}
+
+.tether-option:hover {
+  background-color: rgb(225, 225, 225);
 }
 
 .bar {
@@ -122,14 +132,25 @@
 
 .modal-title {
   text-align: center;
+  background-color: rgb(241, 241, 241);
+}
+
+.modal-footer {
+  background-color: rgb(241, 241, 241);
+}
+
+.modal-body {
+  background-color: rgb(241, 241, 241);
 }
 
 .stream-amount {
-  width: 80%;
-}
-
-.time-amount {
-  width: 22vw;
+  width: 100%;
+  background-color: white;
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.11);
+  padding: 10px;
+  margin-top: -5px;
+  margin-bottom: 5px;
 }
 
 .funds-text {

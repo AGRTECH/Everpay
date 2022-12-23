@@ -31,6 +31,7 @@ import {
   endTimeChanged,
 } from "../store/actions";
 import Dropdowns from "./Dropdowns";
+import tetherLogo from "../img/tether.png";
 
 const CreateStream = (props) => {
   const [show, setShow] = useState(false);
@@ -129,7 +130,7 @@ const CreateStream = (props) => {
             </Modal.Header>
             <Modal.Body>
               <form
-                className=""
+                className="modal-body"
                 onSubmit={(e) => {
                   e.preventDefault();
                   approveFunds(everpay, tether, deposit, account, dispatch);
@@ -147,7 +148,7 @@ const CreateStream = (props) => {
                       downgradeProgressOne();
                     }
                   }}
-                  className="bg-dark text-white form-group stream-amount mr-2"
+                  className="stream-amount"
                   required
                 />
                 <p>What address will be receiving this stream?</p>
@@ -166,27 +167,46 @@ const CreateStream = (props) => {
                       upgradeProgressTwo();
                     }
                   }}
-                  className="bg-dark text-white form-group stream-amount"
+                  className="stream-amount"
                   required
                 />
-                <Dropdown className="form-group">
+                <Dropdown className="">
                   <p>What token will be streamed?</p>
                   <Dropdown.Toggle
-                    variant="success"
-                    className="dropdown-buttons time-amount"
-                    id="dropdown-basic"
+                    variant=""
+                    className="dropdown-buttons"
+                    id=""
                   >
-                    Token
+                    <img
+                      src={tetherLogo}
+                      style={{
+                        width: "45px",
+                        height: "45px",
+                        marginRight: "5px",
+                      }}
+                      alt=""
+                    />
+                    Tether
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu className="tether-option">
                     <Dropdown.Item
+                      className="tether-option"
                       href="#/action-1"
                       onClick={(e) => {
                         dispatch(tokenChanged(tether._address));
                         upgradeProgressThree();
                       }}
                     >
+                      <img
+                        src={tetherLogo}
+                        style={{
+                          width: "45px",
+                          height: "45px",
+                          marginRight: "5px",
+                        }}
+                        alt=""
+                      />
                       Tether
                     </Dropdown.Item>
                   </Dropdown.Menu>
@@ -212,7 +232,7 @@ const CreateStream = (props) => {
                 />
               </form>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="modal-footer">
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
@@ -226,7 +246,7 @@ const CreateStream = (props) => {
                     account,
                     receiver,
                     deposit,
-                    streamToken,
+                    tether._address,
                     endTime,
                     approved
                   );
