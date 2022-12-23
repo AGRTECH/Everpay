@@ -40,6 +40,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(1));
+                    props.upgradeProgressFour();
                   }}
                 >
                   1s
@@ -48,6 +49,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(2));
+                    props.upgradeProgressFour();
                   }}
                 >
                   2s
@@ -56,6 +58,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(3));
+                    props.upgradeProgressFour();
                   }}
                 >
                   3s
@@ -64,6 +67,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(4));
+                    props.upgradeProgressFour();
                   }}
                 >
                   4s
@@ -72,6 +76,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(5));
+                    props.upgradeProgressFour();
                   }}
                 >
                   5s
@@ -80,6 +85,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(6));
+                    props.upgradeProgressFour();
                   }}
                 >
                   6s
@@ -88,6 +94,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(7));
+                    props.upgradeProgressFour();
                   }}
                 >
                   7s
@@ -96,6 +103,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(8));
+                    props.upgradeProgressFour();
                   }}
                 >
                   8s
@@ -104,6 +112,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(9));
+                    props.upgradeProgressFour();
                   }}
                 >
                   9s
@@ -112,6 +121,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(10));
+                    props.upgradeProgressFour();
                   }}
                 >
                   10s
@@ -133,6 +143,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(60));
+                  props.upgradeProgressFour();
                 }}
               >
                 1m
@@ -141,6 +152,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(120));
+                  props.upgradeProgressFour();
                 }}
               >
                 2m
@@ -149,6 +161,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(180));
+                  props.upgradeProgressFour();
                 }}
               >
                 3m
@@ -157,6 +170,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(240));
+                  props.upgradeProgressFour();
                 }}
               >
                 4m
@@ -165,6 +179,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(300));
+                  props.upgradeProgressFour();
                 }}
               >
                 5m
@@ -173,6 +188,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(360));
+                  props.upgradeProgressFour();
                 }}
               >
                 6m
@@ -181,6 +197,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(420));
+                  props.upgradeProgressFour();
                 }}
               >
                 7m
@@ -189,6 +206,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(480));
+                  props.upgradeProgressFour();
                 }}
               >
                 8m
@@ -197,6 +215,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(540));
+                  props.upgradeProgressFour();
                 }}
               >
                 9m
@@ -205,6 +224,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(600));
+                  props.upgradeProgressFour();
                 }}
               >
                 10m
@@ -227,6 +247,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(3600));
+                    props.upgradeProgressFour();
                   }}
                 >
                   1hr
@@ -235,6 +256,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(7200));
+                    props.upgradeProgressFour();
                   }}
                 >
                   2hr
@@ -243,6 +265,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(10800));
+                    props.upgradeProgressFour();
                   }}
                 >
                   3hr
@@ -251,6 +274,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(14400));
+                    props.upgradeProgressFour();
                   }}
                 >
                   4hr
@@ -259,6 +283,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(18000));
+                    props.upgradeProgressFour();
                   }}
                 >
                   5hr
@@ -267,6 +292,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(21600));
+                    props.upgradeProgressFour();
                   }}
                 >
                   6hr
@@ -275,6 +301,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(25200));
+                    props.upgradeProgressFour();
                   }}
                 >
                   7hr
@@ -283,6 +310,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(28800));
+                    props.upgradeProgressFour();
                   }}
                 >
                   8hr
@@ -291,6 +319,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(32400));
+                    props.upgradeProgressFour();
                   }}
                 >
                   9hr
@@ -299,6 +328,7 @@ const Dropdowns = (props) => {
                   href="#/action-1"
                   onClick={(e) => {
                     dispatch(endTimeChanged(36000));
+                    props.upgradeProgressFour();
                   }}
                 >
                   10hr
@@ -320,6 +350,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(86400));
+                  props.upgradeProgressFour();
                 }}
               >
                 1 day
@@ -328,6 +359,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(172800));
+                  props.upgradeProgressFour();
                 }}
               >
                 2 days
@@ -336,6 +368,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(259200));
+                  props.upgradeProgressFour();
                 }}
               >
                 3 days
@@ -344,6 +377,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(345600));
+                  props.upgradeProgressFour();
                 }}
               >
                 4 days
@@ -352,6 +386,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(432000));
+                  props.upgradeProgressFour();
                 }}
               >
                 5 days
@@ -360,6 +395,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(518400));
+                  props.upgradeProgressFour();
                 }}
               >
                 6 days
@@ -368,6 +404,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(604800));
+                  props.upgradeProgressFour();
                 }}
               >
                 7 days
@@ -376,6 +413,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(691200));
+                  props.upgradeProgressFour();
                 }}
               >
                 8 days
@@ -384,6 +422,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(777600));
+                  props.upgradeProgressFour();
                 }}
               >
                 9 days
@@ -392,6 +431,7 @@ const Dropdowns = (props) => {
                 href="#/action-1"
                 onClick={(e) => {
                   dispatch(endTimeChanged(864000));
+                  props.upgradeProgressFour();
                 }}
               >
                 10 days

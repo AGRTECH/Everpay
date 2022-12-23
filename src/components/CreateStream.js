@@ -23,7 +23,7 @@ import {
   requestFunds,
   approveRequestedFunds,
 } from "../store/interactions";
-import { Button, Modal, Dropdown } from "react-bootstrap";
+import { Button, Modal, Dropdown, ProgressBar } from "react-bootstrap";
 import {
   tokenChanged,
   streamAmountChanged,
@@ -34,9 +34,41 @@ import Dropdowns from "./Dropdowns";
 
 const CreateStream = (props) => {
   const [show, setShow] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const upgradeProgressOne = () => {
+    setProgress(25);
+  };
+
+  const downgradeProgressOne = () => {
+    setProgress(0);
+  };
+
+  const upgradeProgressTwo = () => {
+    setProgress(50);
+  };
+
+  const downgradeProgressTwo = () => {
+    setProgress(25);
+  };
+
+  const upgradeProgressThree = () => {
+    setProgress(75);
+  };
+
+  const downgradeProgressThree = () => {
+    setProgress(50);
+  };
+  const upgradeProgressFour = () => {
+    setProgress(100);
+  };
+
+  const downgradeProgressFour = () => {
+    setProgress(75);
+  };
 
   const {
     dispatch,
@@ -87,7 +119,10 @@ const CreateStream = (props) => {
             show={show}
             onHide={handleClose}
             backdrop="static"
-            keyboard={false}
+            keyboard={true}
+            fullscreen="lg-down"
+            animation={true}
+            dialogClassName="stream-modal"
           >
             <Modal.Header className="modal-title" closeButton>
               <Modal.Title className="modal-title">Create Stream</Modal.Title>
@@ -106,6 +141,11 @@ const CreateStream = (props) => {
                   placeholder="1000 Tether"
                   onChange={(e) => {
                     dispatch(streamAmountChanged(parseInt(e.target.value)));
+                    if (e.target.value.length > 0 && e.target.value > 0) {
+                      upgradeProgressOne();
+                    } else if (e.target.value.length < 1) {
+                      downgradeProgressOne();
+                    }
                   }}
                   className="bg-dark text-white form-group stream-amount mr-2"
                   required
@@ -123,6 +163,7 @@ const CreateStream = (props) => {
                       return;
                     } else {
                       dispatch(recipientAddressChanged(e.target.value));
+                      upgradeProgressTwo();
                     }
                   }}
                   className="bg-dark text-white form-group stream-amount"
@@ -143,6 +184,7 @@ const CreateStream = (props) => {
                       href="#/action-1"
                       onClick={(e) => {
                         dispatch(tokenChanged(tether._address));
+                        upgradeProgressThree();
                       }}
                     >
                       Tether
@@ -150,7 +192,7 @@ const CreateStream = (props) => {
                   </Dropdown.Menu>
                 </Dropdown>
                 <p>For how long should the tokens be streamed?</p>
-                <Dropdowns />
+                <Dropdowns upgradeProgressFour={upgradeProgressFour} />
                 <p className="shadow pl-2">{`Final Time Interval: ${
                   endTime
                     ? `D: ${textDay} H: ${textHour} M: ${textMinute} S: ${textSecond}`
@@ -162,6 +204,12 @@ const CreateStream = (props) => {
                 >
                   Approve Funds
                 </button>
+                <ProgressBar
+                  striped
+                  animated={true}
+                  variant="success"
+                  now={progress}
+                />
               </form>
             </Modal.Body>
             <Modal.Footer>

@@ -48,6 +48,8 @@
 }
 
 .newNav {
+  display: flex;
+  justify-content: space-between;
   background-color: #54915e;
   border-bottom: 1px solid rgba(0, 0, 0, 0.24);
 }
@@ -55,6 +57,7 @@
 .everpayLogo {
   width: 150px;
   height: 75px;
+  margin-left: 10px;
 }
 
 .nav-account {
@@ -63,6 +66,8 @@
   background-color: #416346;
   border-radius: 20%;
   border: 2px rgba(0, 0, 0, 0.3) solid;
+  text-decoration: none;
+  margin-right: 10px;
 }
 
 .request-funds-button {
@@ -138,6 +143,42 @@
 
 .stream-text {
   margin-top: 170px;
+}
+
+.nav-right {
+  display: flex;
+  list-style: none;
+  margin-top: 25px;
+}
+
+.nav-tether {
+  margin-right: 15px;
+}
+
+.nav-wallet {
+  margin-right: 10px;
+}
+
+@media (min-width: 1000px) {
+  .stream-modal {
+    position: fixed;
+    top: -30px;
+    right: 0px;
+    transform: translateX(100%);
+    animation: slide-in-right 0.5s forwards;
+  }
+
+  @keyframes slide-in-right {
+    /* Start from the right side of the screen */
+    from {
+      transform: translateX(100%);
+    }
+
+    /* End at the final position */
+    to {
+      transform: translateX(0);
+    }
+  }
 }
 
 @media (max-width: 1000px) {

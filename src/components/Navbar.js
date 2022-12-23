@@ -13,6 +13,7 @@ import everpayLogo from "../img/everpaylogonew.png";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Web3 from "web3";
+import wallet from "../img/walleticon3.png";
 
 const Navbar = (props) => {
   const [account, setAccount] = useState([]);
@@ -45,18 +46,20 @@ const Navbar = (props) => {
   console.log(account);
 
   return (
-    <nav className="newNav navbar navbar-expand-lg navbar-dark shadow sticky-top">
+    <nav className="newNav navbar-dark shadow sticky-top">
       <a className="navbar-brand" href="/#">
         <img className="everpayLogo" src={everpayLogo} alt="" />
       </a>
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
+      <ul className="nav-right">
+        <li className="nav-wallet">
+          <img src={wallet} style={{ width: "20px", height: "20px" }} alt="" />
+        </li>
+        <li className="nav-tether">
           <p className="navAccount mr-4">
-            Tether Balance:{" "}
-            {props.everpayLoaded ? props.accountBalance : "loading..."}
+            {props.everpayLoaded ? props.accountBalance : "loading..."} USDT
           </p>
         </li>
-        <li className="nav-item">
+        <li className="">
           <a
             className="nav-account"
             onClick={() => {
