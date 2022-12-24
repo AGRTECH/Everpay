@@ -212,12 +212,13 @@ const CreateStream = (props) => {
                   </Dropdown.Menu>
                 </Dropdown>
                 <p>For how long should the tokens be streamed?</p>
-                <Dropdowns upgradeProgressFour={upgradeProgressFour} />
-                <p className="shadow pl-2">{`Final Time Interval: ${
+                <p className="shadow pl-2">{`${
                   endTime
-                    ? `D: ${textDay} H: ${textHour} M: ${textMinute} S: ${textSecond}`
-                    : "D: 0  H: 0  M: 0 S: 0"
+                    ? `Days: ${textDay} Hours: ${textHour} Minutes: ${textMinute} Seconds: ${textSecond}`
+                    : "Days:   Hours:   Minutes:  Seconds: "
                 }`}</p>
+                <Dropdowns upgradeProgressFour={upgradeProgressFour} />
+
                 <button
                   className="btn btn-primary stream-button form-group"
                   type="submit"
@@ -253,7 +254,7 @@ const CreateStream = (props) => {
                   handleClose();
                 }}
               >
-                Finalize
+                Stream
               </Button>
             </Modal.Footer>
           </Modal>

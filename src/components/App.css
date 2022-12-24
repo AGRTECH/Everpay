@@ -4,6 +4,12 @@
   font-weight: bold;
 }
 
+body {
+  background-image: url("../img/leavestransparent.png");
+  background-size: cover;
+  background-position: center;
+}
+
 .leaves-img {
   position: absolute;
   z-index: -999999;
@@ -35,6 +41,10 @@
 .dropdown-menu-scroll {
   height: 150px;
   overflow-y: scroll;
+}
+
+.dropdown-item {
+  color: black;
 }
 
 .flex-text {
@@ -149,6 +159,15 @@
   border: 1px solid rgb(224, 224, 224);
   box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.11);
   padding: 10px;
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+.dropdown-nav {
+  width: 100%;
+  background-color: white;
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.11);
   margin-top: -5px;
   margin-bottom: 5px;
 }
