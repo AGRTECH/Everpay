@@ -163,6 +163,13 @@ body {
   margin-bottom: 5px;
 }
 
+.final-time {
+  width: 100%;
+  background-color: white;
+  border: 1px solid rgb(224, 224, 224);
+  box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.11);
+}
+
 .dropdown-nav {
   width: 100%;
   background-color: white;
@@ -228,6 +235,11 @@ body {
 
   .container-1 {
     margin: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .everpayLogo {
   }
 }
 

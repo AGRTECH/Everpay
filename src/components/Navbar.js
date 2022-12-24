@@ -56,7 +56,7 @@ const Navbar = (props) => {
         </li>
         <li className="nav-tether">
           <p className="navAccount mr-4">
-            {props.everpayLoaded ? props.accountBalance : "loading..."} USDT
+            {props.everpayLoaded ? props.accountBalance : ""} USDT
           </p>
         </li>
         <li className="">

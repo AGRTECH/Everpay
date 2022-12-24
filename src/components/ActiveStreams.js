@@ -147,8 +147,8 @@ const ActiveStreams = (props) => {
         {allStreamsLoaded && allStreams.data.length > 0 ? (
           allStreams.data.map((stream) => renderStream(stream, props))
         ) : (
-          <p className="container shadow">
-            No outgoing or incoming streams on this account!
+          <p className="">
+            {/* No outgoing or incoming streams on this account! */}
           </p>
         )}
       </div>
@@ -161,8 +161,8 @@ const ActiveStreams = (props) => {
         {props.allStreamsLoaded ? (
           showStreams(props)
         ) : (
-          <p className="container">
-            No outgoing or incoming streams on this account!
+          <p className="">
+            {/* No outgoing or incoming streams on this account! */}
           </p>
         )}
       </div>

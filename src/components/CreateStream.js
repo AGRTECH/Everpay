@@ -97,85 +97,104 @@ const CreateStream = (props) => {
   const textMinute = Math.floor((endTime % hour) / minute);
   const textSecond = Math.floor((endTime % minute) / second);
 
+  let time = `${textDay} Days ${textHour} Hours ${textMinute} Minutes ${textSecond} Seconds`;
+
   return (
     <>
-      {everpayLoaded && tetherLoaded ? (
-        <div className="container-1 shadow">
-          <p className="stream-text">Tap the button below to create a stream</p>
-          <div className="bar"></div>
+      {/* {everpayLoaded && tetherLoaded ? ( */}
+      <div className="container-1 shadow">
+        <p className="stream-text">Tap the button below to create a stream</p>
+        <div className="bar"></div>
 
-          <Button className="stream-button" onClick={handleShow}>
-            Stream!
-          </Button>
-          <p className="funds-text">Need funds to try out app? Click below</p>
-          <Button
-            className="request-funds-button neg-top"
-            onClick={() => {
-              requestFunds(everpay, tether, deposit, account, dispatch);
-            }}
-          >
-            Request Test Tether
-          </Button>
-          <Modal
-            show={show}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={true}
-            fullscreen="lg-down"
-            animation={true}
-            dialogClassName="stream-modal"
-          >
-            <Modal.Header className="modal-title" closeButton>
-              <Modal.Title className="modal-title">Create Stream</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form
-                className="modal-body"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  approveFunds(everpay, tether, deposit, account, dispatch);
+        <Button className="stream-button" onClick={handleShow}>
+          Stream!
+        </Button>
+        <p className="funds-text">Need funds to try out app? Click below</p>
+        <Button
+          className="request-funds-button neg-top"
+          onClick={() => {
+            requestFunds(everpay, tether, deposit, account, dispatch);
+          }}
+        >
+          Request Test Tether
+        </Button>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={true}
+          fullscreen="lg-down"
+          animation={true}
+          dialogClassName="stream-modal"
+        >
+          <Modal.Header className="modal-title" closeButton>
+            <Modal.Title className="modal-title">Create Stream</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form
+              className="modal-body"
+              onSubmit={(e) => {
+                e.preventDefault();
+                approveFunds(everpay, tether, deposit, account, dispatch);
+              }}
+            >
+              <p>What is the total amount you will stream?</p>
+              <input
+                type="text"
+                placeholder="1000 Tether"
+                onChange={(e) => {
+                  dispatch(streamAmountChanged(parseInt(e.target.value)));
+                  if (e.target.value.length > 0 && e.target.value > 0) {
+                    upgradeProgressOne();
+                  } else if (e.target.value.length < 1) {
+                    downgradeProgressOne();
+                  }
                 }}
-              >
-                <p>What is the total amount you will stream?</p>
-                <input
-                  type="text"
-                  placeholder="1000 Tether"
-                  onChange={(e) => {
-                    dispatch(streamAmountChanged(parseInt(e.target.value)));
-                    if (e.target.value.length > 0 && e.target.value > 0) {
-                      upgradeProgressOne();
-                    } else if (e.target.value.length < 1) {
-                      downgradeProgressOne();
-                    }
-                  }}
-                  className="stream-amount"
-                  required
-                />
-                <p>What address will be receiving this stream?</p>
-                <input
-                  type="text"
-                  placeholder="0x0000..."
-                  onChange={(e) => {
-                    if (
-                      e.target.value.length < 42 ||
-                      e.target.value[0] !== "0" ||
-                      e.target.value[1] !== "x"
-                    ) {
-                      return;
-                    } else {
-                      dispatch(recipientAddressChanged(e.target.value));
-                      upgradeProgressTwo();
-                    }
-                  }}
-                  className="stream-amount"
-                  required
-                />
-                <Dropdown className="">
-                  <p>What token will be streamed?</p>
-                  <Dropdown.Toggle
-                    variant=""
-                    className="dropdown-buttons"
-                    id=""
+                className="stream-amount"
+                required
+              />
+              <p>What address will be receiving this stream?</p>
+              <input
+                type="text"
+                placeholder="0x0000..."
+                onChange={(e) => {
+                  if (
+                    e.target.value.length < 42 ||
+                    e.target.value[0] !== "0" ||
+                    e.target.value[1] !== "x"
+                  ) {
+                    return;
+                  } else {
+                    dispatch(recipientAddressChanged(e.target.value));
+                    upgradeProgressTwo();
+                  }
+                }}
+                className="stream-amount"
+                required
+              />
+              <Dropdown className="">
+                <p>What token will be streamed?</p>
+                <Dropdown.Toggle variant="" className="dropdown-buttons" id="">
+                  <img
+                    src={tetherLogo}
+                    style={{
+                      width: "45px",
+                      height: "45px",
+                      marginRight: "5px",
+                    }}
+                    alt=""
+                  />
+                  Tether
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className="tether-option">
+                  <Dropdown.Item
+                    className="tether-option"
+                    href="#/action-1"
+                    onClick={(e) => {
+                      dispatch(tokenChanged(tether._address));
+                      upgradeProgressThree();
+                    }}
                   >
                     <img
                       src={tetherLogo}
@@ -187,56 +206,36 @@ const CreateStream = (props) => {
                       alt=""
                     />
                     Tether
-                  </Dropdown.Toggle>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              <p>For how long should the tokens be streamed?</p>
+              <p className="final-time">{`${endTime ? time : ""}`}</p>
+              <Dropdowns upgradeProgressFour={upgradeProgressFour} />
 
-                  <Dropdown.Menu className="tether-option">
-                    <Dropdown.Item
-                      className="tether-option"
-                      href="#/action-1"
-                      onClick={(e) => {
-                        dispatch(tokenChanged(tether._address));
-                        upgradeProgressThree();
-                      }}
-                    >
-                      <img
-                        src={tetherLogo}
-                        style={{
-                          width: "45px",
-                          height: "45px",
-                          marginRight: "5px",
-                        }}
-                        alt=""
-                      />
-                      Tether
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <p>For how long should the tokens be streamed?</p>
-                <p className="shadow pl-2">{`${
-                  endTime
-                    ? `Days: ${textDay} Hours: ${textHour} Minutes: ${textMinute} Seconds: ${textSecond}`
-                    : "Days:   Hours:   Minutes:  Seconds: "
-                }`}</p>
-                <Dropdowns upgradeProgressFour={upgradeProgressFour} />
-
+              {everpayLoaded && tetherLoaded ? (
                 <button
                   className="btn btn-primary stream-button form-group"
                   type="submit"
                 >
                   Approve Funds
                 </button>
-                <ProgressBar
-                  striped
-                  animated={true}
-                  variant="success"
-                  now={progress}
-                />
-              </form>
-            </Modal.Body>
-            <Modal.Footer className="modal-footer">
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
+              ) : (
+                ""
+              )}
+              <ProgressBar
+                striped
+                animated={true}
+                variant="success"
+                now={progress}
+              />
+            </form>
+          </Modal.Body>
+          <Modal.Footer className="modal-footer">
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            {everpayLoaded && tetherLoaded ? (
               <Button
                 className="stream-button"
                 variant="primary"
@@ -256,12 +255,15 @@ const CreateStream = (props) => {
               >
                 Stream
               </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      ) : (
+            ) : (
+              ""
+            )}
+          </Modal.Footer>
+        </Modal>
+      </div>
+      {/* ) : (
         <div></div>
-      )}
+      )} */}
     </>
   );
 };
