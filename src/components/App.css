@@ -180,7 +180,7 @@ body {
 }
 
 .funds-text {
-  margin-top: 170px;
+  margin-top: 140px;
   color: rgba(0, 0, 0, 0.5);
 }
 
@@ -280,6 +280,6 @@ body {
 
 @media (max-width: 376px) {
   .funds-text {
-    margin-top: 120px;
+    margin-top: 100px;
   }
 }
