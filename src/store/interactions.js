@@ -66,48 +66,52 @@ export const loadEverpay = async (web3, networkId, dispatch) => {
 };
 
 export const loadAllData = async (everpay, dispatch) => {
-  // Fetch streams with the 'Stream' event stream
-  const streamsCasted = await everpay.getPastEvents("Stream", {
-    fromBlock: 0,
-    toBlock: "latest",
-  });
-  // Format streams
-  const allStreams = streamsCasted.map((event) => event.returnValues);
-  // Add streams to the redux store
-  dispatch(allStreamsLoaded(allStreams));
+  if (everpay) {
+    // Fetch streams with the 'Stream' event stream
+    const streamsCasted = await everpay.getPastEvents("Stream", {
+      fromBlock: 0,
+      toBlock: "latest",
+    });
+    // Format streams
+    const allStreams = streamsCasted.map((event) => event.returnValues);
+    // Add streams to the redux store
+    dispatch(allStreamsLoaded(allStreams));
 
-  // Fetch withdrawls with the 'Withdraw' event stream
-  const withdrawlStream = await everpay.getPastEvents("Withdraw", {
-    fromBlock: 0,
-    toBlock: "latest",
-  });
-  // Format withdrawls
-  const allWithdrawls = withdrawlStream.map((event) => event.returnValues);
-  // Add withdrawls to the redux store
-  dispatch(allWithdrawlsLoaded(allWithdrawls));
-  // Fetch cancels with the 'Cancel' event stream
-  const cancelStream = await everpay.getPastEvents("Cancel", {
-    fromBlock: 0,
-    toBlock: "latest",
-  });
-  // Format withdrawls
-  const allCancels = cancelStream.map((event) => event.returnValues);
-  // Add withdrawls to the redux store
-  dispatch(allCancelsLoaded(allCancels));
+    // Fetch withdrawls with the 'Withdraw' event stream
+    const withdrawlStream = await everpay.getPastEvents("Withdraw", {
+      fromBlock: 0,
+      toBlock: "latest",
+    });
+    // Format withdrawls
+    const allWithdrawls = withdrawlStream.map((event) => event.returnValues);
+    // Add withdrawls to the redux store
+    dispatch(allWithdrawlsLoaded(allWithdrawls));
+    // Fetch cancels with the 'Cancel' event stream
+    const cancelStream = await everpay.getPastEvents("Cancel", {
+      fromBlock: 0,
+      toBlock: "latest",
+    });
+    // Format withdrawls
+    const allCancels = cancelStream.map((event) => event.returnValues);
+    // Add withdrawls to the redux store
+    dispatch(allCancelsLoaded(allCancels));
+  }
 };
 
 export const subscribeToEvents = async (everpay, dispatch) => {
-  everpay.events.Stream({}, (error, event) => {
-    dispatch(streamCreated(event.returnValues));
-  });
+  if (everpay) {
+    everpay.events.Stream({}, (error, event) => {
+      dispatch(streamCreated(event.returnValues));
+    });
 
-  everpay.events.Withdraw({}, (error, event) => {
-    dispatch(withdrawCreated(event.returnValues));
-  });
+    everpay.events.Withdraw({}, (error, event) => {
+      dispatch(withdrawCreated(event.returnValues));
+    });
 
-  everpay.events.Cancel({}, (error, event) => {
-    dispatch(cancelCreated(event.returnValues));
-  });
+    everpay.events.Cancel({}, (error, event) => {
+      dispatch(cancelCreated(event.returnValues));
+    });
+  }
 };
 
 export const showBalances = async (dispatch, account, tether, everpay) => {

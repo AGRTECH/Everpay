@@ -66,7 +66,7 @@ const Navbar = (props) => {
               connectToWallet();
             }}
           >
-            {props.everpayLoaded
+            {props.everpay
               ? `Account: ${props.account
                   .split("")
                   .splice(0, 5, "")
