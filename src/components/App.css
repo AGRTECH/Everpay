@@ -113,6 +113,21 @@ body {
   border: black 3px solid;
 }
 
+.stream-create-button {
+  position: relative;
+  top: 0;
+  transition: top ease 0.5s;
+  background-color: #92a374;
+  border: black 3px solid;
+  display: none;
+}
+
+.stream-create-button:hover {
+  top: -10px;
+  background-color: black;
+  text-decoration: none;
+}
+
 .stream-button:hover {
   top: -10px;
   background-color: black;
@@ -161,6 +176,8 @@ body {
 }
 
 .modal-body {
+  display: flex;
+  flex-direction: column;
   background-color: rgb(241, 241, 241);
 }
 
@@ -253,6 +270,24 @@ body {
   border-radius: 5%;
 }
 
+.show-approve-button {
+  display: block;
+}
+
+.stream-btns {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.stream-approve {
+  margin-right: 15px;
+}
+
+.progress-barr {
+  margin-top: 15px;
+}
+
 @media (min-width: 1000px) {
   .stream-modal {
     position: fixed;
@@ -282,6 +317,14 @@ body {
 
   .container-1 {
     margin: 20px;
+  }
+
+  .modal-body {
+    align-items: center;
+    justify-content: center;
+  }
+  .stream-amount {
+    width: 100%;
   }
 }
 

@@ -173,7 +173,11 @@ const CreateStream = (props) => {
                 required
               />
               <Dropdown className="">
-                <p>What token will be streamed?</p>
+                <p>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What
+                  token will be streamed?
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </p>
                 <Dropdown.Toggle variant="" className="dropdown-buttons" id="">
                   <img
                     src={tetherLogo}
@@ -212,52 +216,58 @@ const CreateStream = (props) => {
               <p>For how long should the tokens be streamed?</p>
               <p className="final-time">{`${endTime ? time : ""}`}</p>
               <Dropdowns upgradeProgressFour={upgradeProgressFour} />
-
-              {everpayLoaded && tetherLoaded ? (
-                <button
-                  className="btn btn-primary stream-button form-group"
-                  type="submit"
-                >
-                  Approve Funds
-                </button>
-              ) : (
-                ""
-              )}
               <ProgressBar
                 striped
                 animated={true}
                 variant="success"
                 now={progress}
+                className="progress-barr"
               />
+              <div className="stream-btns">
+                {everpayLoaded && tetherLoaded ? (
+                  <button
+                    className={`btn btn-primary stream-create-button form-group stream-approve ${
+                      progress === 100 ? "show-approve-button" : ""
+                    }`}
+                    type="submit"
+                  >
+                    Approve
+                  </button>
+                ) : (
+                  ""
+                )}
+                {everpayLoaded && tetherLoaded ? (
+                  <Button
+                    className={`stream-create-button ${
+                      approved ? "show-approve-button" : ""
+                    }`}
+                    variant="primary"
+                    onClick={() => {
+                      createStreamFunc(
+                        dispatch,
+                        everpay,
+                        account,
+                        receiver,
+                        deposit,
+                        tether._address,
+                        endTime,
+                        approved
+                      );
+                      handleClose();
+                    }}
+                  >
+                    Stream
+                  </Button>
+                ) : (
+                  ""
+                )}
+              </div>
             </form>
           </Modal.Body>
           <Modal.Footer className="modal-footer">
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            {everpayLoaded && tetherLoaded ? (
-              <Button
-                className="stream-button"
-                variant="primary"
-                onClick={() => {
-                  createStreamFunc(
-                    dispatch,
-                    everpay,
-                    account,
-                    receiver,
-                    deposit,
-                    tether._address,
-                    endTime,
-                    approved
-                  );
-                  handleClose();
-                }}
-              >
-                Stream
-              </Button>
-            ) : (
-              ""
-            )}
           </Modal.Footer>
         </Modal>
       </div>
