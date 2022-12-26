@@ -15,6 +15,9 @@ import {
   allStreamsLoadedSelector,
 } from "../store/selectors";
 import { Button } from "react-bootstrap";
+import sentIcon from "../img/senticon.png";
+import withdrawnIcon from "../img/withdraw.png";
+import clockIcon from "../img/clockicon.png";
 
 const Streaming = (props) => {
   const web3 = new Web3(window.ethereum);
@@ -117,14 +120,36 @@ const Streaming = (props) => {
           >
             Cancel Stream
           </Button>
+          <div className="bar-activestream"></div>
           <div className="flex-text">
-            <p className="mr-4">
+            <p className="sent-text">
+              <img
+                src={sentIcon}
+                style={{ width: "15px", height: "15px" }}
+                className="sent-icon"
+                alt=""
+              />
               Sent: {Math.ceil(balance / 10 ** 18)} /
               {Math.ceil(props.streamDeposit / 10 ** 18)}
             </p>
-            <p>
+            <p className="withdraw-text">
+              <img
+                src={withdrawnIcon}
+                style={{ width: "15px", height: "15px" }}
+                className="sent-icon"
+                alt=""
+              />
               Withdrawn: {Math.ceil(props.streamReceiverBalance / 10 ** 18)} /
               {Math.ceil(props.streamDeposit / 10 ** 18)}
+            </p>
+            <p className="time-text">
+              <img
+                src={clockIcon}
+                style={{ width: "15px", height: "15px" }}
+                className="clock-icon"
+                alt=""
+              />
+              Time streamed: {Math.ceil(currentTime) - props.streamTimeStamp}
             </p>
           </div>
         </>

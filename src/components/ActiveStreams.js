@@ -82,7 +82,7 @@ const ActiveStreams = (props) => {
     ) {
       return (
         <div className="container-1 shadow" key={stream._streamId}>
-          <h3>Your Incoming Stream</h3>
+          <h3>Your Stream</h3>
 
           <Streaming
             streamDeposit={parseInt(stream._deposit)}
@@ -113,7 +113,7 @@ const ActiveStreams = (props) => {
     ) {
       return (
         <div className="container-1 shadow">
-          <h3>Your Created Stream</h3>
+          <h3>Your Stream</h3>
           <Streaming
             streamDeposit={parseInt(stream._deposit)}
             streamRatePerSecond={parseInt(stream._rate)}

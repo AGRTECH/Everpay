@@ -50,6 +50,10 @@ body {
 .flex-text {
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 50px;
 }
 
 .flex-dropdowns {
@@ -140,6 +144,13 @@ body {
   margin-bottom: 25px;
 }
 
+.bar-activestream {
+  padding: 2px 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
 .modal-title {
   text-align: center;
   background-color: rgb(241, 241, 241);
@@ -204,6 +215,42 @@ body {
 
 .nav-wallet {
   margin-right: 10px;
+}
+
+.sent-text {
+  /* border: 3px solid black; */
+  margin-right: 10px;
+  background-color: #416346;
+  border: 1px solid #54805a;
+  box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.21);
+  padding: 5px;
+  border-radius: 5%;
+}
+
+.sent-icon {
+  margin-right: 5px;
+}
+
+.clock-icon {
+  margin-right: 5px;
+}
+
+.withdraw-text {
+  margin-right: 10px;
+  background-color: #416346;
+  border: 1px solid #54805a;
+  box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.21);
+  padding: 5px;
+  border-radius: 5%;
+}
+
+.time-text {
+  margin-right: 10px;
+  background-color: #416346;
+  border: 1px solid #54805a;
+  box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.21);
+  padding: 5px;
+  border-radius: 5%;
 }
 
 @media (min-width: 1000px) {
