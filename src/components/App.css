@@ -363,7 +363,7 @@ body {
 @media (max-width: 420px) {
   .container-2 {
     margin: 20px;
-    height: 750px;
+    height: 620px;
   }
 
   .everpayLogo {
@@ -418,7 +418,7 @@ body {
   }
 
   .flex-text {
-    margin-right: 15px;
+    margin-left: 20px;
   }
 }
 
