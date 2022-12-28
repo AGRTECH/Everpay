@@ -150,7 +150,7 @@ export const approveFunds = (everpay, tether, deposit, account, dispatch) => {
     })
     .on("error", (error) => {
       console.error(error);
-      window.alert(`There was an error!`);
+      // window.alert(`There was an error!`);
     });
 };
 
@@ -170,7 +170,7 @@ export const approveRequestedFunds = (
     })
     .on("error", (error) => {
       console.error(error);
-      window.alert(`There was an error!`);
+      // window.alert(`There was an error!`);
     });
 };
 
@@ -185,7 +185,7 @@ export const requestFunds = (everpay, tether, deposit, account, dispatch) => {
     })
     .on("error", (error) => {
       console.error(error);
-      window.alert(`There was an error!`);
+      // window.alert(`There was an error!`);
     });
 };
 
@@ -214,7 +214,7 @@ export const createStreamFunc = (
       })
       .on("error", (error) => {
         console.error(error);
-        window.alert(`There was an error!`);
+        // window.alert(`There was an error!`);
       });
   }
 };
@@ -229,7 +229,7 @@ export const withdrawFunc = (dispatch, everpay, account, sender, balance) => {
     })
     .on("error", (error) => {
       console.error(error);
-      window.alert(`There was an error!`);
+      // window.alert(`There was an error!`);
     });
 };
 
@@ -242,7 +242,7 @@ export const cancelFunc = (dispatch, everpay, account, receiver) => {
     })
     .on("error", (error) => {
       console.error(error);
-      window.alert(`There was an error!`);
+      // window.alert(`There was an error!`);
     });
 };
 

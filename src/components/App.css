@@ -38,6 +38,19 @@ body {
   border-radius: 2%;
 }
 
+.container-2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(53, 117, 68, 0.98);
+  height: 650px;
+  margin: 50px 100px 0 100px;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 2%;
+}
+
 .dropdown-menu-scroll {
   height: 150px;
   overflow-y: scroll;
@@ -49,11 +62,15 @@ body {
 
 .flex-text {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-top: 10px;
   align-items: center;
   justify-content: center;
   margin-left: 50px;
+}
+
+.flex-top-row {
+  display: flex;
 }
 
 .flex-dropdowns {
@@ -268,6 +285,7 @@ body {
   box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.21);
   padding: 5px;
   border-radius: 5%;
+  margin-right: 30px;
 }
 
 .show-approve-button {
@@ -329,6 +347,11 @@ body {
 }
 
 @media (max-width: 420px) {
+  .container-2 {
+    margin: 20px;
+    height: 750px;
+  }
+
   .everpayLogo {
     width: 80px;
     height: 40px;
@@ -365,6 +388,23 @@ body {
 
   .request-funds-button {
     font-size: 14px;
+  }
+
+  .sent-text {
+    font-size: 11px;
+  }
+
+  .withdraw-text {
+    font-size: 11px;
+  }
+
+  .time-text {
+    font-size: 11px;
+    margin-right: 20px;
+  }
+
+  .flex-text {
+    margin-right: 15px;
   }
 }
 

@@ -81,7 +81,7 @@ const ActiveStreams = (props) => {
       !statusArr.includes(stream._streamId)
     ) {
       return (
-        <div className="container-1 shadow" key={stream._streamId}>
+        <div className="container-2 shadow" key={stream._streamId}>
           <h3>Your Stream</h3>
 
           <Streaming
@@ -112,7 +112,7 @@ const ActiveStreams = (props) => {
       !statusArr.includes(stream._streamId)
     ) {
       return (
-        <div className="container-1 shadow">
+        <div className="container-2 shadow">
           <h3>Your Stream</h3>
           <Streaming
             streamDeposit={parseInt(stream._deposit)}

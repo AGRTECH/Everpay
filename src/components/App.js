@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
+import LeavesBlowingInTheWind from "./LeavesBlowingInTheWind";
 import StreamChart from "./StreamChart";
 import { connect } from "react-redux";
 import {

@@ -122,26 +122,28 @@ const Streaming = (props) => {
           </Button>
           <div className="bar-activestream"></div>
           <div className="flex-text">
-            <p className="sent-text">
-              <img
-                src={sentIcon}
-                style={{ width: "15px", height: "15px" }}
-                className="sent-icon"
-                alt=""
-              />
-              Sent: {Math.ceil(balance / 10 ** 18)} /
-              {Math.ceil(props.streamDeposit / 10 ** 18)}
-            </p>
-            <p className="withdraw-text">
-              <img
-                src={withdrawnIcon}
-                style={{ width: "15px", height: "15px" }}
-                className="sent-icon"
-                alt=""
-              />
-              Withdrawn: {Math.ceil(props.streamReceiverBalance / 10 ** 18)} /
-              {Math.ceil(props.streamDeposit / 10 ** 18)}
-            </p>
+            <div className="flex-top-row">
+              <p className="sent-text">
+                <img
+                  src={sentIcon}
+                  style={{ width: "15px", height: "15px" }}
+                  className="sent-icon"
+                  alt=""
+                />
+                Sent: {Math.ceil(balance / 10 ** 18)} /
+                {Math.ceil(props.streamDeposit / 10 ** 18)}
+              </p>
+              <p className="withdraw-text">
+                <img
+                  src={withdrawnIcon}
+                  style={{ width: "15px", height: "15px" }}
+                  className="sent-icon"
+                  alt=""
+                />
+                Withdrawn: {Math.ceil(props.streamReceiverBalance / 10 ** 18)} /
+                {Math.ceil(props.streamDeposit / 10 ** 18)}
+              </p>
+            </div>
             <p className="time-text">
               <img
                 src={clockIcon}
@@ -149,7 +151,12 @@ const Streaming = (props) => {
                 className="clock-icon"
                 alt=""
               />
-              Time streamed: {Math.ceil(currentTime) - props.streamTimeStamp}
+              Time streamed:{" "}
+              {props.streamEndTime >
+              Math.ceil(currentTime) - props.streamTimeStamp
+                ? Math.ceil(currentTime) - props.streamTimeStamp
+                : props.streamEndTime}
+              s / {props.streamEndTime}s
             </p>
           </div>
         </>

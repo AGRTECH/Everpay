@@ -32,6 +32,7 @@ import {
 } from "../store/actions";
 import Dropdowns from "./Dropdowns";
 import tetherLogo from "../img/tether.png";
+import LeavesBlowingInTheWind from "./LeavesBlowingInTheWind";
 
 const CreateStream = (props) => {
   const [show, setShow] = useState(false);
