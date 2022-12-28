@@ -130,6 +130,20 @@ body {
   border: black 3px solid;
 }
 
+.stream-button-active {
+  position: relative;
+  top: 0;
+  transition: top ease 0.5s;
+  background-color: #92a374;
+  border: black 3px solid;
+}
+
+.stream-button-active:hover {
+  top: -10px;
+  background-color: black;
+  text-decoration: none;
+}
+
 .stream-create-button {
   position: relative;
   top: 0;
@@ -411,5 +425,14 @@ body {
 @media (max-width: 376px) {
   .funds-text {
     margin-top: 90px;
+  }
+
+  .modal-body {
+    /* margin: 0px; */
+    padding: 0px;
+  }
+
+  .dropdown-nav {
+    margin-bottom: 0px;
   }
 }

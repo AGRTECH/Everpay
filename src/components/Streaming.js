@@ -130,7 +130,7 @@ const Streaming = (props) => {
       ) : (
         <>
           <Button
-            className="stream-button"
+            className="stream-button-active"
             variant="danger"
             onClick={(e) => {
               cancelFunc(
