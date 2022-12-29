@@ -58,6 +58,7 @@ const Streaming = (props) => {
     balance / 10 ** 18,
     props.streamRatePerSecond / 10 ** 18,
     props.streamDeposit,
+    props.streamTimeStamp,
     Math.ceil(props.streamReceiverBalance / 10 ** 18) * 10 ** 18,
     props.streamTimeStamp,
     Math.ceil(currentTime) - props.streamTimeStamp,

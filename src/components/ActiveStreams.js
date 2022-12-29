@@ -87,6 +87,7 @@ const ActiveStreams = (props) => {
           <Streaming
             streamDeposit={parseInt(stream._deposit)}
             streamRatePerSecond={parseInt(stream._rate)}
+            streamTimeStamp={parseInt(stream._timestamp)}
             streamSender={stream._sender}
             streamReceiver={stream._receiver}
             currentAccount={account}
