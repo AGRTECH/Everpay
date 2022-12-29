@@ -6,15 +6,20 @@
 
 body {
   background-image: url("../img/whitebgfinal.png");
-  background-size: cover;
+  /* background-size: cover;
+  background-position: center; */
+  min-height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-position: center;
+  background-size: cover;
 }
 
-.leaves-img {
+/* .leaves-img {
   position: absolute;
   z-index: -999999;
   height: 100vh;
-}
+} */
 
 .container {
   display: flex;
