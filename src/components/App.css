@@ -102,12 +102,13 @@ body {
 
 .nav-account {
   color: black;
-  padding: 5px 15px 5px 38px;
+  padding: 2px 15px 7px 38px;
   background-color: #416346;
   border-radius: 20px;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
   text-decoration: none;
   margin-right: 10px;
+  font-size: 14px;
 }
 
 .request-funds-button {
@@ -343,6 +344,16 @@ body {
   display: none;
 }
 
+.nav-img {
+  height: 40px;
+  width: 40px;
+}
+
+.nav-img-account {
+  height: 40px;
+  width: 40px;
+}
+
 @media (min-width: 1000px) {
   .stream-modal {
     position: fixed;
@@ -385,12 +396,27 @@ body {
   .stream-amount {
     width: 100%;
   }
+
+  .navAccount {
+    font-size: 11px;
+    margin-top: 5px;
+  }
+
+  .nav-img {
+    height: 40px;
+    width: 40px;
+  }
+
+  .nav-img-account {
+    height: 40px;
+    width: 40px;
+  }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 590px) {
   .down-arrow {
     display: block;
-    padding: 5px 15px 5px 38px;
+    padding: -0px 15px 0px 38px;
     background-color: #416346;
     border-radius: 20px;
     /* border: 2px rgba(0, 0, 0, 0.3) solid; */
@@ -402,12 +428,13 @@ body {
 
   .down-arrow-last {
     display: block;
-    padding: 5px 15px 0px 38px;
+    padding: 0px 15px 0px 38px;
     background-color: #416346;
     border-radius: 20px;
     /* border: 2px rgba(0, 0, 0, 0.3) solid; */
     box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
     font-weight: bold;
+    margin-right: 10px;
     text-decoration: none;
   }
 
@@ -416,8 +443,19 @@ body {
     display: none;
   }
 
-  .flex-li {
-    display: flex;
+  .nav-img {
+    height: 32px;
+    width: 32px;
+  }
+
+  .nav-img-account {
+    height: 32px;
+    width: 32px;
+  }
+
+  .navAccount {
+    font-size: 11px;
+    margin-top: 5px;
   }
 }
 

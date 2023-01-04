@@ -54,58 +54,54 @@ const Navbar = (props) => {
       <a className="navbar-brand" href="/#">
         <img className="everpayLogo" src={everpayLogo} alt="" />
       </a>
-      <ul className="nav-right">
-        <li className="nav-wallet">
+      <div className="nav-right">
+        <div className="nav-wallet">
           <img src={wallet} style={{ width: "20px", height: "20px" }} alt="" />
-        </li>
-        <li className="nav-tether">
+        </div>
+        <div className="nav-tether">
           <p className="navAccount mr-4">
             {props.everpayLoaded ? props.accountBalance : ""} USDT
           </p>
-        </li>
+        </div>
 
-        <li className="flex-li">
-          <img
-            src={ethLogo}
-            style={{
-              width: "50px",
-              height: "45px",
-              zIndex: "100",
-              marginRight: "-32px",
-              marginBottom: "0px",
-              position: "relative",
-            }}
-            alt=""
-          />
-          <a className="no-underline">
-            {window.ethereum.networkVersion === "5" && props.everpayLoaded ? (
-              <>
-                <a className="nav-account">Goerli </a>
+        <img
+          className="nav-img"
+          src={ethLogo}
+          style={{
+            zIndex: "100",
+            marginRight: "-32px",
+            marginBottom: "0px",
+            position: "relative",
+          }}
+          alt=""
+        />
+        <a className="no-underline">
+          {window.ethereum.networkVersion === "5" && props.everpayLoaded ? (
+            <>
+              <a className="nav-account">Goerli </a>
 
-                <NetworkOverlay />
-              </>
-            ) : (
-              <a className="nav-account">Switch to Goerli</a>
-            )}
-          </a>
-        </li>
-        <li className="flex-li">
-          <img
-            src={accountIcon}
-            style={{
-              width: "50px",
-              height: "45px",
-              padding: "5px",
-              border: "3px solid black",
-              borderRadius: "50%",
-              zIndex: "100",
-              marginRight: "-32px",
-              marginBottom: "3px",
-              position: "relative",
-              backgroundColor: "#639a6c",
-            }}
-            alt=""
-          />
+              <NetworkOverlay />
+            </>
+          ) : (
+            <a className="nav-account">Switch to Goerli</a>
+          )}
+        </a>
+        <img
+          className="nav-img-account"
+          src={accountIcon}
+          style={{
+            padding: "5px",
+            border: "3px solid black",
+            borderRadius: "50%",
+            zIndex: "100",
+            marginRight: "-32px",
+            marginBottom: "3px",
+            position: "relative",
+            backgroundColor: "#639a6c",
+          }}
+          alt=""
+        />
+        <div className="">
           <>
             <a
               className="nav-account"
@@ -127,8 +123,8 @@ const Navbar = (props) => {
             </a>
             <AccountOverlay account={props.account} />
           </>
-        </li>
-      </ul>
+        </div>
+      </div>
     </nav>
   );
 };
