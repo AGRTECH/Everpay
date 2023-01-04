@@ -96,12 +96,16 @@ body {
   margin-left: 10px;
 }
 
+.no-underline {
+  text-decoration: none;
+}
+
 .nav-account {
   color: black;
-  padding: 10px;
+  padding: 5px 15px 5px 38px;
   background-color: #416346;
-  border-radius: 20%;
-  border: 2px rgba(0, 0, 0, 0.3) solid;
+  border-radius: 20px;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
   text-decoration: none;
   margin-right: 10px;
 }
@@ -326,6 +330,19 @@ body {
   margin-top: 15px;
 }
 
+.question-img:hover {
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+.down-arrow {
+  display: none;
+}
+
+.down-arrow-last {
+  display: none;
+}
+
 @media (min-width: 1000px) {
   .stream-modal {
     position: fixed;
@@ -367,6 +384,40 @@ body {
   }
   .stream-amount {
     width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .down-arrow {
+    display: block;
+    padding: 5px 15px 5px 38px;
+    background-color: #416346;
+    border-radius: 20px;
+    /* border: 2px rgba(0, 0, 0, 0.3) solid; */
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+
+  .down-arrow-last {
+    display: block;
+    padding: 5px 15px 0px 38px;
+    background-color: #416346;
+    border-radius: 20px;
+    /* border: 2px rgba(0, 0, 0, 0.3) solid; */
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .nav-account {
+    margin-right: 0px;
+    display: none;
+  }
+
+  .flex-li {
+    display: flex;
   }
 }
 
@@ -429,6 +480,38 @@ body {
 
   .flex-text {
     margin-left: 20px;
+  }
+
+  .down-arrow {
+    display: block;
+    padding: 5px 15px 5px 38px;
+    background-color: #416346;
+    border-radius: 20px;
+    /* border: 2px rgba(0, 0, 0, 0.3) solid; */
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+
+  .down-arrow-last {
+    display: block;
+    padding: 5px 15px 5px 38px;
+    background-color: #416346;
+    border-radius: 20px;
+    /* border: 2px rgba(0, 0, 0, 0.3) solid; */
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .nav-account {
+    margin-right: 0px;
+    display: none;
+  }
+
+  .flex-li {
+    display: flex;
   }
 }
 

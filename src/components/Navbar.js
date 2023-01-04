@@ -8,12 +8,16 @@ import {
   everpaySelector,
   depositSelector,
 } from "../store/selectors";
+import NetworkOverlay from "./NetworkOverlay";
+import AccountOverlay from "./AccountOverlay";
+import ethLogo from "../img/ethlogo.svg";
 import { requestFunds } from "../store/interactions";
 import everpayLogo from "../img/everpaylogonew.png";
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Web3 from "web3";
 import wallet from "../img/walleticon3.png";
+import accountIcon from "../img/accounticon.png";
 
 const Navbar = (props) => {
   const [account, setAccount] = useState([]);
@@ -59,25 +63,70 @@ const Navbar = (props) => {
             {props.everpayLoaded ? props.accountBalance : ""} USDT
           </p>
         </li>
-        <li className="">
-          <a
-            className="nav-account"
-            onClick={() => {
-              connectToWallet();
+
+        <li className="flex-li">
+          <img
+            src={ethLogo}
+            style={{
+              width: "50px",
+              height: "45px",
+              zIndex: "100",
+              marginRight: "-32px",
+              marginBottom: "0px",
+              position: "relative",
             }}
-          >
-            {props.everpay
-              ? `Account: ${props.account
-                  .split("")
-                  .splice(0, 5, "")
-                  .join("")}...${props.account
-                  .split("")
-                  .splice(38, 4, "")
-                  .join("")}`
-              : window.ethereum.networkVersion !== 5 && account.length > 1
-              ? "Please Switch to Goerli"
-              : "Connect Wallet"}
+            alt=""
+          />
+          <a className="no-underline">
+            {window.ethereum.networkVersion === "5" && props.everpayLoaded ? (
+              <>
+                <a className="nav-account">Goerli </a>
+
+                <NetworkOverlay />
+              </>
+            ) : (
+              <a className="nav-account">Switch to Goerli</a>
+            )}
           </a>
+        </li>
+        <li className="flex-li">
+          <img
+            src={accountIcon}
+            style={{
+              width: "50px",
+              height: "45px",
+              padding: "5px",
+              border: "3px solid black",
+              borderRadius: "50%",
+              zIndex: "100",
+              marginRight: "-32px",
+              marginBottom: "3px",
+              position: "relative",
+              backgroundColor: "#639a6c",
+            }}
+            alt=""
+          />
+          <>
+            <a
+              className="nav-account"
+              onClick={() => {
+                connectToWallet();
+              }}
+            >
+              {props.everpay
+                ? `${props.account
+                    .split("")
+                    .splice(0, 2, "")
+                    .join("")}...${props.account
+                    .split("")
+                    .splice(38, 4, "")
+                    .join("")}`
+                : window.ethereum.networkVersion !== "5" && account.length > 1
+                ? "---"
+                : "Connect Wallet"}
+            </a>
+            <AccountOverlay account={props.account} />
+          </>
         </li>
       </ul>
     </nav>

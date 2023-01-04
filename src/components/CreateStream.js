@@ -2,6 +2,7 @@ import "./App.css";
 import Web3 from "web3";
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import QuestionOverlay from "./QuestionOverlay";
 import {
   everpaySelector,
   accountSelector,
@@ -110,7 +111,9 @@ const CreateStream = (props) => {
         <Button className="stream-button" onClick={handleShow}>
           Stream!
         </Button>
-        <p className="funds-text">Need funds to try out app? Click below</p>
+        <p className="funds-text">
+          Need funds to try out app? Click below <QuestionOverlay />
+        </p>
         <Button
           className="request-funds-button neg-top"
           onClick={() => {
