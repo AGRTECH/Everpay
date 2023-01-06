@@ -123,7 +123,7 @@ contract Everpay is ReentrancyGuard {
   * @param _sender the address streaming
   */
 
-  function withdraw(uint _balance, address _sender) public nonReentrant {
+  function withdraw(uint _balance, address _sender) public {
     require(_balance > 0);
     require(isStreaming[msg.sender] == true);
     // Transfer available balance to receiver (criteria for whats available to withdraw is made in JS)
@@ -153,7 +153,7 @@ contract Everpay is ReentrancyGuard {
   * @param _receiver the address being streamed to
   */
 
-  function cancel(address _receiver) public nonReentrant {
+  function cancel(address _receiver) public {
     // Has to be streaming to be able to cancel
     require(isStreaming[_receiver]);
 
